@@ -1,0 +1,45 @@
+{
+    "files.associations": {
+  },
+    "C_Cpp.default.systemIncludePath": [ 
+        "/usr/lib/gcc/arm-none-eabi/7.3.1/include",
+        "/usr/lib/gcc/arm-none-eabi/7.3.1/include-fixed",
+        "/usr/arm-none-eabi/include",
+    ],
+   
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/BMLite_example/inc",
+        "${workspaceFolder}/hcp/inc",
+        "${workspaceFolder}/HAL_Driver/inc",
+        "${workspaceFolder}/HAL_Driver/sdk",
+        "${workspaceFolder}/HAL_Driver/sdk/components",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/scheduler",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/timer",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/strerror",
+        "${workspaceFolder}/HAL_Driver/sdk/components/toolchain/cmsis/include",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/util",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/balloc",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/ringbuf",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/fifo",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/bsp",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/log",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/uart",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/button",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/experimental_section_vars",
+        "${workspaceFolder}/HAL_Driver/sdk/integration/nrfx/legacy",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/delay",
+        "${workspaceFolder}/HAL_Driver/sdk/integration/nrfx",
+        "${workspaceFolder}/HAL_Driver/sdk/components/drivers_nrf/nrf_soc_nosd",
+        "${workspaceFolder}/HAL_Driver/sdk/external/segger_rtt",
+        "${workspaceFolder}/HAL_Driver/sdk/components/boards",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/memobj",
+        "${workspaceFolder}/HAL_Driver/sdk/modules/nrfx/drivers/include",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/log/src",
+        "${workspaceFolder}/HAL_Driver/sdk/external/fprintf",
+        "${workspaceFolder}/HAL_Driver/sdk/components/libraries/atomic",
+        "${workspaceFolder}/HAL_Driver/sdk/modules/nrfx",
+        "${workspaceFolder}/HAL_Driver/sdk/modules/nrfx/hal",
+        "${workspaceFolder}/HAL_Driver/sdk/modules/nrfx/mdk",
+    
+    ]
+}

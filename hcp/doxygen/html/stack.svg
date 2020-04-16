@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Genererad av Microsoft Visio, SVG-export stack.svg BEP Stack -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="9.41488in" height="2.47892in"
+		viewBox="0 0 677.871 178.482" xml:space="preserve" color-interpolation-filters="sRGB" class="st8">
+	<v:documentProperties v:langID="1053" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="msvNoAutoConnect" v:val="VT0(1):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {stroke:#7c7c7c;stroke-width:0.25}
+		.st2 {fill:#000000;font-family:Calibri Light;font-size:0.916672em}
+		.st3 {fill:#ffd965;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st4 {fill:#92cddc;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st5 {fill:#f9c499;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st6 {fill:#c4d6a0;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st7 {fill:#bfbfbf;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st8 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<g v:mID="5" v:index="2" v:groupContext="foregroundPage">
+		<title>Layer Structure</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<v:layer v:name="Koppling" v:index="0"/>
+		<g id="shape23-1" v:mID="23" v:groupContext="shape" transform="translate(364.302,131.761) rotate(-90) scale(-1,1)">
+			<title>Side brace.23</title>
+			<desc>Physical Layer</desc>
+			<v:userDefs>
+				<v:ud v:nameU="TxtW" v:val="VT0(0.55555555555556):29"/>
+				<v:ud v:nameU="TxtA" v:val="VT0(1.5707963267949):37"/>
+				<v:ud v:nameU="TxtAState" v:val="VT0(0):26"/>
+				<v:ud v:nameU="TxtWState" v:val="VT0(0):26"/>
+				<v:ud v:nameU="MaxRadius" v:val="VT0(0.19685039370079):24"/>
+				<v:ud v:nameU="PosCH1" v:prompt="Constrains X postion of Control Handle #1" v:val="VT0(0):26"/>
+				<v:ud v:nameU="PosCH2" v:prompt="Constrains Y postion of Control Handle #2" v:val="VT0(0):26"/>
+				<v:ud v:nameU="Scale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="AntiScale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+				<v:ud v:nameU="TxtW" v:prompt="" v:val="VT0(1.5277777777778):3"/>
+				<v:ud v:nameU="TxtWState" v:prompt="" v:val="VT0(2):26"/>
+				<v:ud v:nameU="MaxRadius" v:prompt="" v:val="VT0(0.098425196850393):1"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
+			<v:textRect cx="14.1607" cy="240.563" width="110.01" height="21.204" transform="rotate(90)"/>
+			<path d="M0 135.96 L0 171.4 A7.08022 7.08022 -180 0 0 7.08 178.48 A7.08022 7.08022 0 0 1 14.16 185.56 A7.08022 7.08022
+						 0 0 1 21.24 178.48 L21.27 178.48 A7.08022 7.08022 -180 0 0 28.35 171.4 L28.35 135.96" class="st1"/>
+			<text x="189.56" y="17.46" transform="rotate(-90) scale(-1,1)" class="st2" v:langID="1053"><v:paragraph/><v:tabList/>Physical Layer</text>		</g>
+		<g id="shape24-5" v:mID="24" v:groupContext="shape" transform="translate(364.302,103.414) rotate(-90) scale(-1,1)">
+			<title>Side brace.24</title>
+			<desc>Link Layer</desc>
+			<v:userDefs>
+				<v:ud v:nameU="TxtW" v:val="VT0(0.55555555555556):29"/>
+				<v:ud v:nameU="TxtA" v:val="VT0(1.5707963267949):37"/>
+				<v:ud v:nameU="TxtAState" v:val="VT0(0):26"/>
+				<v:ud v:nameU="TxtWState" v:val="VT0(0):26"/>
+				<v:ud v:nameU="MaxRadius" v:val="VT0(0.19685039370079):24"/>
+				<v:ud v:nameU="PosCH1" v:prompt="Constrains X postion of Control Handle #1" v:val="VT0(0):26"/>
+				<v:ud v:nameU="PosCH2" v:prompt="Constrains Y postion of Control Handle #2" v:val="VT0(0):26"/>
+				<v:ud v:nameU="Scale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="AntiScale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+				<v:ud v:nameU="TxtW" v:prompt="" v:val="VT0(1.5277777777778):3"/>
+				<v:ud v:nameU="TxtWState" v:prompt="" v:val="VT0(2):26"/>
+				<v:ud v:nameU="MaxRadius" v:prompt="" v:val="VT0(0.098425196850393):1"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
+			<v:textRect cx="14.1607" cy="240.563" width="110.01" height="21.204" transform="rotate(90)"/>
+			<path d="M0 135.96 L0 171.4 A7.08022 7.08022 -180 0 0 7.08 178.48 A7.08022 7.08022 0 0 1 14.16 185.56 A7.08022 7.08022
+						 0 0 1 21.24 178.48 L21.27 178.48 A7.08022 7.08022 -180 0 0 28.35 171.4 L28.35 135.96" class="st1"/>
+			<text x="189.56" y="17.46" transform="rotate(-90) scale(-1,1)" class="st2" v:langID="1053"><v:paragraph/><v:tabList/>Link Layer</text>		</g>
+		<g id="shape25-9" v:mID="25" v:groupContext="shape" transform="translate(364.302,75.0679) rotate(-90) scale(-1,1)">
+			<title>Side brace.25</title>
+			<desc>Transport Layer</desc>
+			<v:userDefs>
+				<v:ud v:nameU="TxtW" v:val="VT0(0.55555555555556):29"/>
+				<v:ud v:nameU="TxtA" v:val="VT0(1.5707963267949):37"/>
+				<v:ud v:nameU="TxtAState" v:val="VT0(0):26"/>
+				<v:ud v:nameU="TxtWState" v:val="VT0(0):26"/>
+				<v:ud v:nameU="MaxRadius" v:val="VT0(0.19685039370079):24"/>
+				<v:ud v:nameU="PosCH1" v:prompt="Constrains X postion of Control Handle #1" v:val="VT0(0):26"/>
+				<v:ud v:nameU="PosCH2" v:prompt="Constrains Y postion of Control Handle #2" v:val="VT0(0):26"/>
+				<v:ud v:nameU="Scale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="AntiScale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+				<v:ud v:nameU="TxtW" v:prompt="" v:val="VT0(1.5277777777778):3"/>
+				<v:ud v:nameU="TxtWState" v:prompt="" v:val="VT0(2):26"/>
+				<v:ud v:nameU="MaxRadius" v:prompt="" v:val="VT0(0.098425196850393):1"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
+			<v:textRect cx="14.1607" cy="240.563" width="110.01" height="21.204" transform="rotate(90)"/>
+			<path d="M0 135.96 L0 171.4 A7.08022 7.08022 -180 0 0 7.08 178.48 A7.08022 7.08022 0 0 1 14.16 185.56 A7.08022 7.08022
+						 0 0 1 21.24 178.48 L21.27 178.48 A7.08022 7.08022 -180 0 0 28.35 171.4 L28.35 135.96" class="st1"/>
+			<text x="189.56" y="17.46" transform="rotate(-90) scale(-1,1)" class="st2" v:langID="1053"><v:paragraph/><v:tabList/>Transport Layer</text>		</g>
+		<g id="shape26-13" v:mID="26" v:groupContext="shape" transform="translate(364.302,46.7215) rotate(-90) scale(-1,1)">
+			<title>Side brace.26</title>
+			<desc>Application Layer</desc>
+			<v:userDefs>
+				<v:ud v:nameU="TxtW" v:val="VT0(0.55555555555556):29"/>
+				<v:ud v:nameU="TxtA" v:val="VT0(1.5707963267949):37"/>
+				<v:ud v:nameU="TxtAState" v:val="VT0(0):26"/>
+				<v:ud v:nameU="TxtWState" v:val="VT0(0):26"/>
+				<v:ud v:nameU="MaxRadius" v:val="VT0(0.19685039370079):24"/>
+				<v:ud v:nameU="PosCH1" v:prompt="Constrains X postion of Control Handle #1" v:val="VT0(0):26"/>
+				<v:ud v:nameU="PosCH2" v:prompt="Constrains Y postion of Control Handle #2" v:val="VT0(0):26"/>
+				<v:ud v:nameU="Scale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="AntiScale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+				<v:ud v:nameU="TxtW" v:prompt="" v:val="VT0(1.5277777777778):3"/>
+				<v:ud v:nameU="TxtWState" v:prompt="" v:val="VT0(2):26"/>
+				<v:ud v:nameU="MaxRadius" v:prompt="" v:val="VT0(0.098425196850393):1"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
+			<v:textRect cx="14.1732" cy="240.569" width="110.01" height="21.204" transform="rotate(90)"/>
+			<path d="M0 79.24 L0 171.4 A7.0865 7.0865 -180 0 0 7.09 178.48 A7.0865 7.0865 0 0 1 14.17 185.57 A7.0865 7.0865 0 0 1
+						 21.26 178.48 A7.0865 7.0865 -180 0 0 28.35 171.4 L28.35 79.24" class="st1"/>
+			<text x="189.57" y="17.47" transform="rotate(-90) scale(-1,1)" class="st2" v:langID="1053"><v:paragraph/><v:tabList/>Application Layer</text>		</g>
+		<g id="group32-17" transform="translate(131.761,-75.0679)" v:mID="32" v:groupContext="group">
+			<title>Ark.32</title>
+			<g id="shape6-18" v:mID="6" v:groupContext="shape" transform="translate(113.386,0)">
+				<title>Ark.6</title>
+				<desc>Seq Len</desc>
+				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+				<v:textRect cx="28.3465" cy="164.309" width="56.7" height="28.3465"/>
+				<rect x="0" y="150.136" width="56.6929" height="28.3465" class="st3"/>
+				<text x="11.16" y="167.61" class="st2" v:langID="1053"><v:paragraph v:horizAlign="1"/><v:tabList/>Seq Len</text>			</g>
+			<g id="shape7-21" v:mID="7" v:groupContext="shape" transform="translate(170.079,0)">
+				<title>Ark.7</title>
+				<desc>Payload</desc>
+				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+				<v:textRect cx="70.8661" cy="164.309" width="141.74" height="28.3465"/>
+				<rect x="0" y="150.136" width="141.732" height="28.3465" class="st3"/>
+				<text x="53.53" y="167.61" class="st2" v:langID="1053"><v:paragraph v:horizAlign="1"/><v:tabList/>Payload</text>			</g>
+			<g id="shape30-24" v:mID="30" v:groupContext="shape" transform="translate(56.6929,0)">
+				<title>Ark.30</title>
+				<desc>Seq Nr</desc>
+				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+				<v:textRect cx="28.3465" cy="164.309" width="56.7" height="28.3465"/>
+				<rect x="0" y="150.136" width="56.6929" height="28.3465" class="st3"/>
+				<text x="13.63" y="167.61" class="st2" v:langID="1053"><v:paragraph v:horizAlign="1"/><v:tabList/>Seq Nr</text>			</g>
+			<g id="shape31-27" v:mID="31" v:groupContext="shape">
+				<title>Ark.31</title>
+				<desc>Size</desc>
+				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+				<v:textRect cx="28.3465" cy="164.309" width="56.7" height="28.3465"/>
+				<rect x="0" y="150.136" width="56.6929" height="28.3465" class="st3"/>
+				<text x="19.76" y="167.61" class="st2" v:langID="1053"><v:paragraph v:horizAlign="1"/><v:tabList/>Size</text>			</g>
+		</g>
+		<g id="group33-30" transform="translate(18.375,-46.7215)" v:mID="33" v:groupContext="group">
+			<title>Ark.33</title>
+			<g id="shape3-31" v:mID="3" v:groupContext="shape" transform="translate(56.687,0)">
+				<title>Ark.3</title>
+				<desc>Size</desc>
+				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+				<v:textRect cx="28.3435" cy="164.322" width="56.69" height="28.3214"/>
+				<rect x="0" y="150.161" width="56.687" height="28.3214" class="st4"/>
+				<text x="19.76" y="167.62" class="st2" v:langID="1053"><v:paragraph v:horizAlign="1"/><v:tabList/>Size</text>			</g>
+			<g id="shape4-34" v:mID="4" v:groupContext="shape" transform="translate(113.374,0)">
+				<title>Ark.4</title>
+				<desc>Payload</desc>
+				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+				<v:textRect cx="155.889" cy="164.322" width="311.78" height="28.3214"/>
+				<rect x="0" y="150.161" width="311.779" height="28.3214" class="st4"/>
+				<text x="138.55" y="167.62" class="st2" v:langID="1053"><v:paragraph v:horizAlign="1"/><v:tabList/>Payload</text>			</g>
+			<g id="shape5-37" v:mID="5" v:groupContext="shape" transform="translate(425.153,0)">
+				<title>Ark.5</title>
+				<desc>CRC</desc>
+				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+				<v:textRect cx="28.3435" cy="164.322" width="56.69" height="28.3214"/>
+				<rect x="0" y="150.161" width="56.687" height="28.3214" class="st4"/>
+				<text x="19.53" y="167.62" class="st2" v:langID="1053"><v:paragraph v:horizAlign="1"/><v:tabList/>CRC</text>			</g>
+			<g id="shape29-40" v:mID="29" v:groupContext="shape" transform="translate(0,-1.21527E-07)">
+				<title>Ark.29</title>
+				<desc>Channel</desc>
+				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+				<v:textRect cx="28.3435" cy="164.322" width="56.69" height="28.3214"/>
+				<rect x="0" y="150.161" width="56.687" height="28.3214" class="st4"/>
+				<text x="10.31" y="167.62" class="st2" v:langID="1053"><v:paragraph v:horizAlign="1"/><v:tabList/>Channel</text>			</g>
+		</g>
+		<g id="shape34-43" v:mID="34" v:groupContext="shape" transform="translate(301.84,-131.761)">
+			<title>Ark.34</title>
+			<desc>HCP</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="70.8661" cy="164.309" width="141.74" height="28.3465"/>
+			<rect x="0" y="150.136" width="141.732" height="28.3465" class="st5"/>
+			<text x="61.72" y="167.61" class="st2" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>HCP</text>		</g>
+		<g id="shape35-46" v:mID="35" v:groupContext="shape" transform="translate(364.302,18.375) rotate(-90) scale(-1,1)">
+			<title>Side brace.35</title>
+			<desc>HCP</desc>
+			<v:userDefs>
+				<v:ud v:nameU="TxtW" v:val="VT0(0.55555555555556):29"/>
+				<v:ud v:nameU="TxtA" v:val="VT0(1.5707963267949):37"/>
+				<v:ud v:nameU="TxtAState" v:val="VT0(0):26"/>
+				<v:ud v:nameU="TxtWState" v:val="VT0(0):26"/>
+				<v:ud v:nameU="MaxRadius" v:val="VT0(0.19685039370079):24"/>
+				<v:ud v:nameU="PosCH1" v:prompt="Constrains X postion of Control Handle #1" v:val="VT0(0):26"/>
+				<v:ud v:nameU="PosCH2" v:prompt="Constrains Y postion of Control Handle #2" v:val="VT0(0):26"/>
+				<v:ud v:nameU="Scale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="AntiScale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+				<v:ud v:nameU="TxtW" v:prompt="" v:val="VT0(1.5277777777778):3"/>
+				<v:ud v:nameU="TxtWState" v:prompt="" v:val="VT0(2):26"/>
+				<v:ud v:nameU="MaxRadius" v:prompt="" v:val="VT0(0.098425196850393):1"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
+			<v:textRect cx="14.1732" cy="240.569" width="110.01" height="21.204" transform="rotate(90)"/>
+			<path d="M0 79.24 L0 171.4 A7.0865 7.0865 -180 0 0 7.09 178.48 A7.0865 7.0865 0 0 1 14.17 185.57 A7.0865 7.0865 0 0 1
+						 21.26 178.48 A7.0865 7.0865 -180 0 0 28.35 171.4 L28.35 79.24" class="st1"/>
+			<text x="189.57" y="17.47" transform="rotate(-90) scale(-1,1)" class="st2" v:langID="1033"><v:paragraph/><v:tabList/>HCP</text>		</g>
+		<g id="group37-50" transform="translate(18.375,-18.375)" v:mID="37" v:groupContext="group">
+			<title>Ark.37</title>
+			<g id="shape2-51" v:mID="2" v:groupContext="shape">
+				<title>Ark.2</title>
+				<desc>Link Data</desc>
+				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+				<v:textRect cx="240.945" cy="164.309" width="481.89" height="28.3465"/>
+				<rect x="0" y="150.136" width="481.89" height="28.3465" class="st6"/>
+				<text x="220.58" y="167.61" class="st2" v:langID="1053"><v:paragraph v:horizAlign="1"/><v:tabList/>Link Data</text>			</g>
+		</g>
+		<g id="group38-54" transform="translate(301.84,-103.414)" v:mID="38" v:groupContext="group">
+			<title>Ark.38</title>
+			<g id="shape1-55" v:mID="1" v:groupContext="shape">
+				<title>Ark.1</title>
+				<desc>Cleartext / Security</desc>
+				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+				<v:textRect cx="70.8661" cy="164.309" width="141.74" height="28.3465"/>
+				<rect x="0" y="150.136" width="141.732" height="28.3465" class="st7"/>
+				<text x="28.65" y="167.61" class="st2" v:langID="1053"><v:paragraph v:horizAlign="1"/><v:tabList/>Cleartext / Security</text>			</g>
+		</g>
+	</g>
+</svg>

@@ -1,0 +1,9 @@
+<map id="inc/fpc_com_packets.h" name="inc/fpc_com_packets.h">
+<area shape="rect" id="node2" href="$fpc__com__chain_8h.html" title="Communication chain type definitions. " alt="" coords="172,80,315,107"/>
+<area shape="rect" id="node3" href="$fpc__com__link_8h.html" title="Communication link interface. " alt="" coords="7,155,138,181"/>
+<area shape="rect" id="node6" href="$fpc__com__transport_8h.html" title="Communication transport interface. " alt="" coords="162,155,325,181"/>
+<area shape="rect" id="node7" href="$fpc__hcp_8h.html" title="Host Communication Protocol interface. " alt="" coords="349,155,449,181"/>
+<area shape="rect" id="node4" href="$fpc__com__link_8c.html" title="Communication link layer implementation. " alt="" coords="5,229,137,256"/>
+<area shape="rect" id="node5" href="$fpc__com__transport_8c.html" title="Communication transport layer implementation. " alt="" coords="162,229,325,256"/>
+<area shape="rect" id="node8" href="$fpc__hcp_8c.html" title="Host Communication Protocol implementation. " alt="" coords="349,229,450,256"/>
+</map>

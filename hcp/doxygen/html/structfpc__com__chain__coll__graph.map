@@ -1,0 +1,5 @@
+<map id="fpc_com_chain" name="fpc_com_chain">
+<area shape="rect" id="node2" href="$structfpc__com__chain__private.html" title="fpc_com_chain_private" alt="" coords="5,184,161,211"/>
+<area shape="rect" id="node3" href="$structfpc__hcp__packet.html" title="Application Command Packet. " alt="" coords="26,95,141,121"/>
+<area shape="rect" id="node4" href="$structfpc__hcp__arg__data.html" title="Command Argument. " alt="" coords="21,5,146,32"/>
+</map>
