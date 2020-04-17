@@ -26,10 +26,19 @@
 #include "nrf.h"
 #include "nrf_drv_timer.h"
 #include "nrfx_config.h"
+#include "boards.h"
 
 const nrf_drv_timer_t TIMER_LED = NRF_DRV_TIMER_INSTANCE(0);
 
 static volatile uint32_t systick;
+volatile uint32_t button_pressed_time = 0;
+
+static uint32_t btn_press_start;
+static uint32_t btn_pressed = 0;
+
+#define BMLITE_BUTTON 3
+
+static void check_buttons();
 
 /**
  * @brief Handler for timer events.
@@ -41,6 +50,7 @@ static void timer_event_handler(nrf_timer_event_t event_type, void* p_context)
     {
         case NRF_TIMER_EVENT_COMPARE0:
             systick++;
+            check_buttons();
             break;
 
         default:
@@ -48,7 +58,6 @@ static void timer_event_handler(nrf_timer_event_t event_type, void* p_context)
             break;
     }
 }
-
 
 void platform_timebase_init(void)
 {
@@ -66,7 +75,6 @@ void platform_timebase_init(void)
          &TIMER_LED, NRF_TIMER_CC_CHANNEL0, time_ticks, NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK, true);
 
     nrf_drv_timer_enable(&TIMER_LED);
-
 }
 
 void platform_timebase_busy_wait(uint32_t delay)
@@ -86,4 +94,30 @@ void platform_timebase_busy_wait(uint32_t delay)
 uint32_t platform_timebase_get_tick(void)
 {
     return systick;
+}
+
+static void check_buttons()
+{
+    if (bsp_board_button_state_get(BMLITE_BUTTON)) {
+        if (btn_pressed == 0) {
+            btn_press_start = systick;
+            btn_pressed = 1;
+        }
+    } else { // Btn released
+        if (btn_pressed) {
+            if (systick > btn_press_start) {
+                button_pressed_time = systick - btn_press_start;
+            } else {
+                button_pressed_time = systick + ~btn_press_start + 1;
+            }
+            btn_pressed = 0;
+        }
+    }
+}
+
+uint32_t platform_get_button_press_time()
+{
+    uint32_t time = button_pressed_time;
+    button_pressed_time = 0;
+    return time;
 }

@@ -90,8 +90,3 @@ void platform_set_led(platform_led_status_t color)
 {
     board_set_led(color);
 }
-
-uint32_t platform_get_button_press_time(void)
-{
-    return board_get_button_press_time();
-}

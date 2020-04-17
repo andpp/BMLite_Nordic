@@ -44,7 +44,7 @@ typedef enum {
 } platform_led_status_t;
 
 /**
- * @brief Initializes board functions
+ * @brief Initializes board
  *
  * @param[in]       speed_hz    Baudrate.
  */
