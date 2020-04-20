@@ -232,6 +232,8 @@ fpc_bep_result_t bep_enroll_finger(fpc_com_chain_t *chain)
     fpc_bep_result_t bep_result = FPC_BEP_RESULT_OK;
     bool enroll_done = false;
 
+    bmlite_on_start_enroll();
+
     /* Enroll start */
     bep_result = send_command(chain, CMD_ENROLL, ARG_START, NULL, 0);
     if (bep_result != FPC_BEP_RESULT_OK) {
@@ -245,18 +247,16 @@ fpc_bep_result_t bep_enroll_finger(fpc_com_chain_t *chain)
         goto exit;
     }
 
-    bmlite_on_start_enroll();
-
     for (uint8_t i = 0; i < MAX_CAPTURE_ATTEMPTS; ++i) {
 
         bmlite_on_start_enrollcapture();
         bep_result = bep_capture(chain, CAPTURE_TIMEOUT);
+        bmlite_on_finish_enrollcapture();
+
         if (bep_result != FPC_BEP_RESULT_OK) {
             bmlite_on_error(BMLITE_ERROR_CAPTURE, bep_result);
             break;
         }
-
-        bmlite_on_finish_enrollcapture();
 
         /* Enroll add */
         bep_result = send_command(chain, CMD_ENROLL, ARG_ADD, NULL, 0);
