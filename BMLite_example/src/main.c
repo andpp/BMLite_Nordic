@@ -56,17 +56,23 @@ void bmlite_on_error(bmlite_error_t error, int32_t value)
 // void bmlite_on_start_capture();
 // void bmlite_on_finish_capture();
 
-void bmlite_on_finish_enroll()
-{
-
-}
-
 void bmlite_on_start_enroll()
 {
     platform_set_led(1);
     platform_timebase_busy_wait(500);
     platform_set_led(2);
     platform_timebase_busy_wait(500);
+}
+
+void bmlite_on_finish_enroll()
+{
+    platform_set_led(1);
+    platform_timebase_busy_wait(100);
+    platform_set_led(0);
+    platform_timebase_busy_wait(100);
+    platform_set_led(1);
+    platform_timebase_busy_wait(100);
+    platform_set_led(0);
 }
 
 void bmlite_on_start_enrollcapture()
@@ -77,7 +83,6 @@ void bmlite_on_start_enrollcapture()
 void bmlite_on_finish_enrollcapture()
 {
     platform_set_led(0);
-    platform_timebase_busy_wait(500);
 }
 
 void bmlite_on_identify_start()
