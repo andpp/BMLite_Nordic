@@ -88,5 +88,5 @@ void platform_sw_reset(void)
 
 void platform_set_led(platform_led_status_t color)
 {
-    board_set_led(color);
+    board_set_leds(color);
 }

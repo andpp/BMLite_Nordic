@@ -25,11 +25,7 @@
 /** LED blink time in ms */
 #define LED_BLINK_TIME_MS    200
 
-/** Board button used for app control */
-#define BMLITE_BUTTON 3
-
-
-static void _board_set_leds(uint8_t color)
+void board_set_leds(uint8_t color)
 {
 	uint32_t i;
 
@@ -41,9 +37,4 @@ static void _board_set_leds(uint8_t color)
         }
         color = color >> 1;
 	}
-}
-
-void board_set_led(platform_led_status_t color)
-{
-    _board_set_leds(color);
 }

@@ -8,7 +8,7 @@
 
 #include "platform.h"
 
-void board_set_led(platform_led_status_t color);
+void board_set_leds(platform_led_status_t color);
 uint32_t board_get_button_press_time();
 
 #endif
