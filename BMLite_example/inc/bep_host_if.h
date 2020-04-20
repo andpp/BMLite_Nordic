@@ -29,6 +29,80 @@
 
 #define REMOVE_ID_ALL_TEMPLATES 0U
 
+
+typedef enum {
+    BMLITE_ERROR_OK = 0,
+    BMLITE_ERROR_CAPTURE,
+    BMLITE_ERROR_CAPTURE_START,
+    BMLITE_ERROR_ENROLL_START,
+    BMLITE_ERROR_ENROLL_ADD,
+    BMLITE_ERROR_ENROLL_FINISH,
+    BMLITE_ERROR_WRONG_ANSWER,
+    BMLITE_ERROR_FINGER_WAIT,
+    BMLITE_ERROR_IDENTYFY,
+    BMLITE_ERROR_TEMPLATE_SAVE,
+    BMLITE_ERROR_TEMPLATE_DELETE,
+    BMLITE_ERROR_TEMPLATE_COUNT,
+    BMLITE_ERROR_TEMPLATE_GETIDS,
+    BMLITE_ERROR_IMAGE_EXTRACT,
+    BMLITE_ERROR_IMAGE_GETSIZE,
+    BMLITE_ERROR_IMAGE_GET,
+    BMLITE_ERROR_GETVERSION,
+    BMLITE_ERROR_SW_RESET,
+    BMLITE_ERROR_CALIBRATE,
+    BMLITE_ERROR_CALIBRATE_DELETE,
+    BMLITE_ERROR_SEND_CMD
+} bmlite_error_t;
+
+/**
+ * @brief Error Callback function
+ *
+ * @param[in] Callback Error Code
+ * @param[in] BEP result code
+ */
+void bmlite_on_error(bmlite_error_t error, int32_t value);
+
+/**
+ * @brief Starting Capture Callback function
+ */
+void bmlite_on_start_capture();
+
+/**
+ * @brief Finishing Capture Callback function
+ */
+void bmlite_on_finish_capture();
+
+/**
+ * @brief Starting Enroll Callback function
+ */
+void bmlite_on_start_enroll();
+
+/**
+ * @brief Finishing Enroll Callback function
+ */
+void bmlite_on_finish_enroll();
+
+/**
+ * @brief Starting Capture for Enroll Callback function
+ */
+void bmlite_on_start_enrollcapture();
+
+/**
+ * @brief Finishing Capture for Enroll Callback function
+ */
+void bmlite_on_finish_enrollcapture();
+
+/**
+ * @brief Starting Identify Callback function
+ */
+void bmlite_on_identify_start();
+
+/**
+ * @brief Finishing Identify Callback function
+ */
+void bmlite_on_identify_finish();
+
+
 /**
  * @brief Sends HCP commands for capturing an image in Bio MCU
  *

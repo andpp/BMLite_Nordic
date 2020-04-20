@@ -35,6 +35,59 @@
 #include "platform.h"
 // #include "fpc_hal_interfaces.h"
 
+void bmlite_on_error(bmlite_error_t error, int32_t value)
+{
+    if(value != FPC_BEP_RESULT_TIMEOUT) {
+        platform_set_led(3);
+        platform_timebase_busy_wait(500);
+        platform_set_led(0);
+        platform_timebase_busy_wait(500);
+        platform_set_led(3);
+        platform_timebase_busy_wait(500);
+        platform_set_led(0);
+        platform_timebase_busy_wait(500);
+    } else {
+        platform_set_led(3);
+        platform_timebase_busy_wait(100);
+        platform_set_led(0);
+    }
+}
+
+// void bmlite_on_start_capture();
+// void bmlite_on_finish_capture();
+
+void bmlite_on_finish_enroll()
+{
+
+}
+
+void bmlite_on_start_enroll()
+{
+    platform_set_led(1);
+    platform_timebase_busy_wait(500);
+    platform_set_led(2);
+    platform_timebase_busy_wait(500);
+}
+
+void bmlite_on_start_enrollcapture()
+{
+    platform_set_led(3);
+}
+
+void bmlite_on_finish_enrollcapture()
+{
+    platform_set_led(0);
+    platform_timebase_busy_wait(500);
+}
+
+void bmlite_on_identify_start()
+{
+    platform_set_led(0);
+}
+
+// void bmlite_on_identify_finish();
+
+
 int main (int argc, char **argv)
 {
     int baudrate = 4000000;
@@ -71,12 +124,8 @@ int main (int argc, char **argv)
                 // nothing hapened
             } else if (btn_time < 5000) {
                 // Enroll
-                platform_set_led(BMLITE_LED_STATUS_STARTENROLL);
-                platform_timebase_busy_wait(500);
                 res = bep_enroll_finger(&hcp_chain);
                 res = bep_save_template(&hcp_chain, current_id++);
-                platform_set_led(BMLITE_LED_STATUS_STARTENROLL);
-                platform_timebase_busy_wait(500);
             } else {
                 // Erase All templates
                 platform_set_led(BMLITE_LED_STATUS_DELETE_TEMPLATES);
