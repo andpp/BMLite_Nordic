@@ -1,31 +1,27 @@
 /*
- * Copyright (c) 2019 Fingerprint Cards AB <tech@fingerprints.com>
+ * Copyright (c) 2020 Fingerprint Cards AB
  *
- * All rights are reserved.
- * Proprietary and confidential.
- * Unauthorized copying of this file, via any medium is strictly prohibited.
- * Any use is subject to an appropriate license granted by Fingerprint Cards AB.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 /**
- * @file    spi.c
+ * @file    platform_spi.c
  * @brief   SPI functions
  */
 
-#include <stdbool.h>
-#include <stdint.h>
-#include <stddef.h>
-
 #include "nrf_drv_spi.h"
-#include "app_util_platform.h"
-#include "nrf_gpio.h"
-#include "nrf_delay.h"
 #include "boards.h"
-#include "app_error.h"
-#include <string.h>
-#define NRF_LOG_MODULE_NAME APP
-#include "nrf_log.h"
-#include "nrf_log_ctrl.h"
+#include "nrf_gpio.h"
 #include "nrf_gpiote.h"
 #include "nrf_drv_gpiote.h"
 
@@ -68,7 +64,7 @@ static void spi_write_read(uint8_t *write, uint8_t *read, size_t size, bool leav
 
 	nrf_drv_gpiote_out_clear(BMLITE_CS_PIN);
 
-	APP_ERROR_CHECK(nrf_drv_spi_transfer(&spi, m_tx_buf, size, m_rx_buf, size));
+	nrf_drv_spi_transfer(&spi, m_tx_buf, size, m_rx_buf, size);
 
 	while (!spi_xfer_done)
 	{
@@ -106,9 +102,9 @@ void nordic_bmlite_spi_init(uint32_t speed_hz)
     spi_config.mosi_pin = BMLITE_MOSI_PIN;
     spi_config.sck_pin  = BMLITE_CLK_PIN;
     spi_config.frequency  = NRF_SPI_FREQ_8M;// default to 8M for now
-    APP_ERROR_CHECK(nrf_drv_spi_init(&spi, &spi_config, spi_event_handler, NULL));
+    nrf_drv_spi_init(&spi, &spi_config, spi_event_handler, NULL);
 
     nrf_drv_gpiote_out_config_t out_config = GPIOTE_CONFIG_OUT_SIMPLE(true);
-    APP_ERROR_CHECK(nrf_drv_gpiote_out_init(BMLITE_CS_PIN, &out_config));
+    nrf_drv_gpiote_out_init(BMLITE_CS_PIN, &out_config);
 }
 

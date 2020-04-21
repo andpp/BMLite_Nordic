@@ -1,36 +1,33 @@
 /*
- * Copyright (c) 2019 Fingerprint Cards AB <tech@fingerprints.com>
+ * Copyright (c) 2020 Fingerprint Cards AB
  *
- * All rights are reserved.
- * Proprietary and confidential.
- * Unauthorized copying of this file, via any medium is strictly prohibited.
- * Any use is subject to an appropriate license granted by Fingerprint Cards AB.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 /**
- * @file   sensor.c
- * @brief  Sensor control functions.
+ * @file   board_hal.c
+ * @brief  Board Specific functions
  */
 
-#include <string.h>
 #include <stdbool.h>
 
-#include "nrf_gpio.h"
-#include "nrf_drv_spi.h"
-#include "app_util_platform.h"
-#include "nrf_gpio.h"
-#include "nrf_delay.h"
 #include "boards.h"
-#include "app_error.h"
-#include <string.h>
-#define NRF_LOG_MODULE_NAME APP
-#include "nrf_log.h"
-#include "nrf_log_ctrl.h"
+#include "nrf_gpio.h"
 #include "nrf_gpiote.h"
 #include "nrf_drv_gpiote.h"
 
+#include "bmlite.h"
 #include "platform_spi.h"
-// #include "fpc_timebase.h"
 
 #define FPC_PIN_RESET   	ARDUINO_2_PIN
 #define FPC_PIN_INTERRUPT   ARDUINO_A2_PIN

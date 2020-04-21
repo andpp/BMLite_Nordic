@@ -29,9 +29,9 @@
 #include "fpc_com_result.h"
 
 /**
- * @brief LED colors.
+ * @brief LED status.
  *
- * Different LED colors.
+ * Different LED status.
  */
 typedef enum {
     BMLITE_LED_STATUS_READY = 0,

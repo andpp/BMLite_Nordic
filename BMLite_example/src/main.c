@@ -24,16 +24,12 @@
  * @brief   Main file for FPC BM-Lite Communication example.
  */
 
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
 
 #include "bep_host_if.h"
 #include "com_common.h"
 #include "platform.h"
-// #include "fpc_hal_interfaces.h"
 
 void bmlite_on_error(bmlite_error_t error, int32_t value)
 {
@@ -113,12 +109,9 @@ int main (int argc, char **argv)
         uint32_t current_id = 0;
         bool match;
 
+        // These two lines for debug purpose only 
         memset(version, 0, 100);
         fpc_bep_result_t res = bep_version(&hcp_chain, version, 99);
-        if (res == FPC_BEP_RESULT_OK)
-        {
-            printf("%s\n", version);
-        }
 
         platform_set_led(BMLITE_LED_STATUS_READY);
 

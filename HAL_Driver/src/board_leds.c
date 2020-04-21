@@ -1,23 +1,26 @@
 /*
- * Copyright (c) 2019 Fingerprint Cards AB <tech@fingerprints.com>
+ * Copyright (c) 2020 Fingerprint Cards AB
  *
- * All rights are reserved.
- * Proprietary and confidential.
- * Unauthorized copying of this file, via any medium is strictly prohibited.
- * Any use is subject to an appropriate license granted by Fingerprint Cards AB.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 /**
- * @file   btns_leds.c
- * @brief  Sensor control functions.
+ * @file   board_leds.c
+ * @brief  Leds control functions.
  */
 
 #include "boards.h"
 #include "btns_leds.h"
-
-#include <stddef.h>
-#include <stdint.h>
-#include <stdbool.h>
 
 /** LED ON time in ms */
 #define LED_SOLID_ON_TIME_MS 700
