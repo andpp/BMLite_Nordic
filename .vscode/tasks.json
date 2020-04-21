@@ -19,6 +19,20 @@
                 "kind": "build",
                 "isDefault": true
             }
-        }
+        },
+        {
+            "type": "shell",
+            "label": "make clean",
+            "command": "make",
+            "args": ["-C", "BMLite_example", "clean"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": ["relative", "${workspaceFolder}/BMLite_example", "absolute"]
+            },
+            "group": "build"
+        }        
     ]
 }
