@@ -59,7 +59,7 @@ static void timer_event_handler(nrf_timer_event_t event_type, void* p_context)
     }
 }
 
-void platform_timebase_init(void)
+void hal_timebase_init(void)
 {
     uint32_t time_ms = 1; //Time (in miliseconds) between consecutive compare events.
     uint32_t time_ticks;
@@ -77,7 +77,7 @@ void platform_timebase_init(void)
     nrf_drv_timer_enable(&TIMER_LED);
 }
 
-void platform_timebase_busy_wait(uint32_t delay)
+void hal_timebase_busy_wait(uint32_t delay)
 {
     uint32_t start;
     uint32_t delay_internal = 0;
@@ -91,7 +91,7 @@ void platform_timebase_busy_wait(uint32_t delay)
     }
 }
 
-uint32_t platform_timebase_get_tick(void)
+uint32_t hal_timebase_get_tick(void)
 {
     return systick;
 }

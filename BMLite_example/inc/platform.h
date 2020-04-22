@@ -27,6 +27,7 @@
 #include <stddef.h>
 
 #include "fpc_com_result.h"
+#include "bmlite_hal.h"
 
 /**
  * @brief LED status.
@@ -79,34 +80,6 @@ fpc_com_result_t platform_bmlite_send(uint16_t size, const uint8_t *data, uint32
  */
 fpc_com_result_t platform_bmlite_receive(uint16_t size, uint8_t *data, uint32_t timeout,
         void *session);
-
-/**
- * @brief Initializes timebase. Starts system tick counter.
- */
-void platform_timebase_init(void);
-
-/**
- * @brief Reads the system tick counter.
- *
- * @return Tick count since platform_timebase_init() call. [ms]
- */
-uint32_t platform_timebase_get_tick(void);
-
-/**
- * @brief Busy wait.
- *
- * @param[in] ms  Time to wait [ms].
- * 0 => return immediately
- * 1 => wait at least 1ms etc.
- */
-void platform_timebase_busy_wait(uint32_t ms);
-
-/**
- * @brief Get time in micro seconds
- *
- * @return time in us.
- */
-uint32_t platform_get_time(void);
 
 /**
  * @brief Stops execution if a debug interface is attached.

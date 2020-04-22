@@ -35,16 +35,16 @@ void bmlite_on_error(bmlite_error_t error, int32_t value)
 {
     if(value != FPC_BEP_RESULT_TIMEOUT) {
         platform_set_led(3);
-        platform_timebase_busy_wait(500);
+        hal_timebase_busy_wait(500);
         platform_set_led(0);
-        platform_timebase_busy_wait(500);
+        hal_timebase_busy_wait(500);
         platform_set_led(3);
-        platform_timebase_busy_wait(500);
+        hal_timebase_busy_wait(500);
         platform_set_led(0);
-        platform_timebase_busy_wait(500);
+        hal_timebase_busy_wait(500);
     } else {
         platform_set_led(3);
-        platform_timebase_busy_wait(100);
+        hal_timebase_busy_wait(100);
         platform_set_led(0);
     }
 }
@@ -55,19 +55,19 @@ void bmlite_on_error(bmlite_error_t error, int32_t value)
 void bmlite_on_start_enroll()
 {
     platform_set_led(1);
-    platform_timebase_busy_wait(500);
+    hal_timebase_busy_wait(500);
     platform_set_led(2);
-    platform_timebase_busy_wait(500);
+    hal_timebase_busy_wait(500);
 }
 
 void bmlite_on_finish_enroll()
 {
     platform_set_led(1);
-    platform_timebase_busy_wait(100);
+    hal_timebase_busy_wait(100);
     platform_set_led(0);
-    platform_timebase_busy_wait(100);
+    hal_timebase_busy_wait(100);
     platform_set_led(1);
-    platform_timebase_busy_wait(100);
+    hal_timebase_busy_wait(100);
     platform_set_led(0);
 }
 
@@ -96,9 +96,7 @@ int main (int argc, char **argv)
     uint16_t size[2] = { 256, 256 };
     fpc_com_chain_t hcp_chain;
 
-    if(!platform_init(baudrate)) {
-        platform_halt_if_debug();
-    }
+    platform_init(baudrate);
 
     init_com_chain(&hcp_chain, buffer, size, NULL);
     hcp_chain.channel = 1;
@@ -127,7 +125,7 @@ int main (int argc, char **argv)
             } else {
                 // Erase All templates
                 platform_set_led(BMLITE_LED_STATUS_DELETE_TEMPLATES);
-                platform_timebase_busy_wait(500);
+                hal_timebase_busy_wait(500);
                 res = bep_delete_template(&hcp_chain, REMOVE_ID_ALL_TEMPLATES);
             }
             res = bep_identify_finger(&hcp_chain, &template_id, &match);
@@ -138,7 +136,7 @@ int main (int argc, char **argv)
             } else {
                 platform_set_led(BMLITE_LED_STATUS_NOMATCH);
             }
-            platform_timebase_busy_wait(500);
+            hal_timebase_busy_wait(500);
         }
     }
 }

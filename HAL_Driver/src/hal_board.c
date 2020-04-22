@@ -15,7 +15,7 @@
  */
 
 /**
- * @file   board_hal.c
+ * @file   hal_board.c
  * @brief  Board Specific functions
  */
 
@@ -26,17 +26,16 @@
 #include "nrf_gpiote.h"
 #include "nrf_drv_gpiote.h"
 
-#include "bmlite.h"
-#include "platform_spi.h"
+#include "bmlite_hal.h"
 
-#define FPC_PIN_RESET   	ARDUINO_2_PIN
-#define FPC_PIN_INTERRUPT   ARDUINO_A2_PIN
+#define BMLITE_PIN_RESET   	ARDUINO_2_PIN
+#define BMLITE_PIN_STATUS   ARDUINO_A2_PIN
 
 static volatile bool sensor_interrupt = false;
 
 static void nordic_bmlite_gpio_init    (void);
 
-void nordic_board_init(uint32_t speed_hz)
+void hal_board_init(uint32_t speed_hz)
 {
 
 	if (NRF_UICR->REGOUT0 != UICR_REGOUT0_VOUT_3V3)
@@ -51,21 +50,23 @@ void nordic_board_init(uint32_t speed_hz)
 	NRF_USBD->ENABLE = 1;
 
     nordic_bmlite_gpio_init();
-    nordic_bmlite_spi_init(speed_hz);
+    hal_bmlite_spi_init(speed_hz);
+    bsp_board_init(BSP_INIT_LEDS | BSP_INIT_BUTTONS);
+
 }
 
-void nordic_bmlite_reset(bool state)
+void hal_bmlite_reset(bool state)
 {
     if(!state) {
-	    nrf_drv_gpiote_out_set(FPC_PIN_RESET);
+	    nrf_drv_gpiote_out_set(BMLITE_PIN_RESET);
     } else {
-        nrf_drv_gpiote_out_clear(FPC_PIN_RESET);
+        nrf_drv_gpiote_out_clear(BMLITE_PIN_RESET);
     }
 }
 
-bool nordic_bmlite_get_status(void)
+bool hal_bmlite_get_status(void)
 {
-    return nrf_drv_gpiote_in_is_set(FPC_PIN_INTERRUPT);
+    return nrf_drv_gpiote_in_is_set(BMLITE_PIN_STATUS);
 }
 
 static void nordic_bmlite_gpio_init(void)
@@ -74,12 +75,12 @@ static void nordic_bmlite_gpio_init(void)
     err_code = nrf_drv_gpiote_init();
     APP_ERROR_CHECK(err_code);
     nrf_drv_gpiote_out_config_t out_config = GPIOTE_CONFIG_OUT_SIMPLE(true);
-    err_code = nrf_drv_gpiote_out_init(FPC_PIN_RESET, &out_config);
+    err_code = nrf_drv_gpiote_out_init(BMLITE_PIN_RESET, &out_config);
     APP_ERROR_CHECK(err_code);
-	nrf_drv_gpiote_out_task_enable(FPC_PIN_RESET); //Enable task for output pin (toggle)
+	nrf_drv_gpiote_out_task_enable(BMLITE_PIN_RESET); //Enable task for output pin (toggle)
 
     nrf_drv_gpiote_in_config_t config = GPIOTE_CONFIG_IN_SENSE_LOTOHI(true);
-    err_code = nrf_drv_gpiote_in_init(FPC_PIN_INTERRUPT, &config, NULL);
+    err_code = nrf_drv_gpiote_in_init(BMLITE_PIN_STATUS, &config, NULL);
     APP_ERROR_CHECK(err_code);
     nrf_gpiote_event_clear(NRF_GPIOTE_EVENTS_IN_0);
     return;

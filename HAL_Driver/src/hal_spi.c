@@ -25,7 +25,8 @@
 #include "nrf_gpiote.h"
 #include "nrf_drv_gpiote.h"
 
-#include "platform.h"
+//#include "platform.h"
+#include "bmlite_hal.h"
 #include "fpc_bep_types.h"
 
 
@@ -76,7 +77,7 @@ static void spi_write_read(uint8_t *write, uint8_t *read, size_t size, bool leav
 
 }
 
-fpc_bep_result_t nordic_bmlite_spi_write_read(uint8_t *write, uint8_t *read, size_t size,
+fpc_bep_result_t hal_bmlite_spi_write_read(uint8_t *write, uint8_t *read, size_t size,
         bool leave_cs_asserted)
 {
 
@@ -95,7 +96,7 @@ fpc_bep_result_t nordic_bmlite_spi_write_read(uint8_t *write, uint8_t *read, siz
 	return FPC_BEP_RESULT_OK;
 }
 
-void nordic_bmlite_spi_init(uint32_t speed_hz)
+void hal_bmlite_spi_init(uint32_t speed_hz)
 {
     //spi_config.ss_pin   = BMLITE_CS_PIN;
 	spi_config.miso_pin = BMLITE_MISO_PIN;

@@ -20,7 +20,7 @@
  */
 
 #include "boards.h"
-#include "btns_leds.h"
+#include "bmlite_hal.h"
 
 /** LED ON time in ms */
 #define LED_SOLID_ON_TIME_MS 700
@@ -28,7 +28,7 @@
 /** LED blink time in ms */
 #define LED_BLINK_TIME_MS    200
 
-void board_set_leds(uint8_t color)
+void hal_set_leds(uint8_t color)
 {
 	uint32_t i;
 

@@ -10,6 +10,7 @@
     "C_Cpp.default.includePath": [
         "${workspaceFolder}/BMLite_example/inc",
         "${workspaceFolder}/hcp/inc",
+        "${workspaceFolder}/CMSIS/Include",
         "${workspaceFolder}/HAL_Driver/inc",
         "${workspaceFolder}/HAL_Driver/sdk",
         "${workspaceFolder}/HAL_Driver/sdk/components",
