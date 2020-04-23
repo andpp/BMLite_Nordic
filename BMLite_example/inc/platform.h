@@ -27,7 +27,6 @@
 #include <stddef.h>
 
 #include "fpc_com_result.h"
-#include "bmlite_hal.h"
 
 /**
  * @brief LED status.
@@ -37,11 +36,10 @@
 typedef enum {
     BMLITE_LED_STATUS_READY = 0,
     BMLITE_LED_STATUS_MATCH,
-    BMLITE_LED_STATUS_NOMATCH,
     BMLITE_LED_STATUS_WAITTOUCH,
-    BMLITE_LED_STATUS_STARTENROLL,
-    BMLITE_LED_STATUS_FINISHENROLL,
-    BMLITE_LED_STATUS_DELETE_TEMPLATES
+    BMLITE_LED_STATUS_ENROLL,
+    BMLITE_LED_STATUS_DELETE_TEMPLATES,
+    BMLITE_LED_STATUS_ERROR,
 } platform_led_status_t;
 
 /**
@@ -90,14 +88,6 @@ void platform_halt_if_debug(void);
  * @brief Performs a software reset.
  */
 void platform_sw_reset(void) __attribute__((__noreturn__));
-
-/**
- * @brief Set LED to a given color and display status.
- *
- * @param[in] color Color of RGB LED.
- * @param[in] status Status of LED.
- */
-void platform_set_led(platform_led_status_t color);
 
 /**
  * @brief Get button press time.

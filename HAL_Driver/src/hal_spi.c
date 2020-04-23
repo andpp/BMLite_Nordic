@@ -25,10 +25,8 @@
 #include "nrf_gpiote.h"
 #include "nrf_drv_gpiote.h"
 
-//#include "platform.h"
 #include "bmlite_hal.h"
 #include "fpc_bep_types.h"
-
 
 #define SPI_INSTANCE  0 /**< SPI instance index. */
 

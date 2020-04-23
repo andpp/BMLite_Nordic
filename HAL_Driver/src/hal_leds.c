@@ -28,7 +28,7 @@
 /** LED blink time in ms */
 #define LED_BLINK_TIME_MS    200
 
-void hal_set_leds(uint8_t color)
+static void set_leds(uint8_t color)
 {
 	uint32_t i;
 
@@ -40,4 +40,64 @@ void hal_set_leds(uint8_t color)
         }
         color = color >> 1;
 	}
+}
+
+void hal_set_leds(platform_led_status_t status, uint16_t mode)
+{
+     switch(status) {
+          case BMLITE_LED_STATUS_READY:
+               set_leds(0);
+               break;
+          case BMLITE_LED_STATUS_MATCH:
+               if (mode) {
+                    set_leds(1);
+               } else {
+                    set_leds(2);
+               }
+               hal_timebase_busy_wait(500);
+               break;
+          case BMLITE_LED_STATUS_WAITTOUCH:
+               if (mode) {
+                    set_leds(3);
+               }
+               break;
+          case BMLITE_LED_STATUS_ENROLL:
+               if (mode) { 
+                    // Start enroll
+                    set_leds(1);
+                    hal_timebase_busy_wait(500);
+                    set_leds(2);
+                    hal_timebase_busy_wait(500);
+               } else {
+                    // Finish enroll
+                    set_leds(1);
+                    hal_timebase_busy_wait(100);
+                    set_leds(0);
+                    hal_timebase_busy_wait(100);
+                    set_leds(2);
+                    hal_timebase_busy_wait(100);
+               }
+               break;
+          case BMLITE_LED_STATUS_DELETE_TEMPLATES:
+                    set_leds(4);
+                    hal_timebase_busy_wait(100);
+                    set_leds(0);
+                    hal_timebase_busy_wait(100);
+                    set_leds(4);
+                    hal_timebase_busy_wait(100);
+               break;
+          case BMLITE_LED_STATUS_ERROR:
+               if (mode) {
+                    set_leds(3);
+                    hal_timebase_busy_wait(70);
+               } else {
+                    set_leds(3);
+                    hal_timebase_busy_wait(500);
+                    set_leds(0);
+                    hal_timebase_busy_wait(500);
+                    set_leds(3);
+                    hal_timebase_busy_wait(500);
+               }
+               break;
+    }
 }

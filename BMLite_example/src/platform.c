@@ -65,7 +65,3 @@ fpc_com_result_t platform_bmlite_receive(uint16_t size, uint8_t *data, uint32_t 
     return hal_bmlite_spi_write_read(buff, data, size, false);
 }
 
-void platform_set_led(platform_led_status_t color)
-{
-    hal_set_leds(color);
-}

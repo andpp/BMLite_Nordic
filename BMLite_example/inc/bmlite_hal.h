@@ -82,8 +82,9 @@ uint32_t hal_get_button_press_time();
 /*
  * @brief Set LED(s) status
  * @param[in] Status
+ * @param[in] Status modifier
  */
-void hal_set_leds(uint8_t status);
+void hal_set_leds(platform_led_status_t status, uint16_t mode);
 
 
 #endif /* BMLITE_H */

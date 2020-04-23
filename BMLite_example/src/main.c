@@ -30,22 +30,15 @@
 #include "bep_host_if.h"
 #include "com_common.h"
 #include "platform.h"
+#include "bmlite_hal.h"
 
 void bmlite_on_error(bmlite_error_t error, int32_t value)
 {
     if(value != FPC_BEP_RESULT_TIMEOUT) {
-        platform_set_led(3);
-        hal_timebase_busy_wait(500);
-        platform_set_led(0);
-        hal_timebase_busy_wait(500);
-        platform_set_led(3);
-        hal_timebase_busy_wait(500);
-        platform_set_led(0);
-        hal_timebase_busy_wait(500);
+        hal_set_leds(BMLITE_LED_STATUS_ERROR, false);
     } else {
-        platform_set_led(3);
-        hal_timebase_busy_wait(100);
-        platform_set_led(0);
+        // Timeout - not really an error here
+        hal_set_leds(BMLITE_LED_STATUS_ERROR, true);
     }
 }
 
@@ -54,36 +47,27 @@ void bmlite_on_error(bmlite_error_t error, int32_t value)
 
 void bmlite_on_start_enroll()
 {
-    platform_set_led(1);
-    hal_timebase_busy_wait(500);
-    platform_set_led(2);
-    hal_timebase_busy_wait(500);
+    hal_set_leds(BMLITE_LED_STATUS_ENROLL, true);
 }
 
 void bmlite_on_finish_enroll()
 {
-    platform_set_led(1);
-    hal_timebase_busy_wait(100);
-    platform_set_led(0);
-    hal_timebase_busy_wait(100);
-    platform_set_led(1);
-    hal_timebase_busy_wait(100);
-    platform_set_led(0);
+    hal_set_leds(BMLITE_LED_STATUS_ENROLL, false);
 }
 
 void bmlite_on_start_enrollcapture()
 {
-    platform_set_led(3);
+    hal_set_leds(BMLITE_LED_STATUS_WAITTOUCH, true);
 }
 
 void bmlite_on_finish_enrollcapture()
 {
-    platform_set_led(0);
+    hal_set_leds(BMLITE_LED_STATUS_READY, false);
 }
 
 void bmlite_on_identify_start()
 {
-    platform_set_led(0);
+    hal_set_leds(BMLITE_LED_STATUS_READY, true);
 }
 
 // void bmlite_on_identify_finish();
@@ -111,11 +95,10 @@ int main (int argc, char **argv)
         memset(version, 0, 100);
         fpc_bep_result_t res = bep_version(&hcp_chain, version, 99);
 
-        platform_set_led(BMLITE_LED_STATUS_READY);
-
         while (1)
         {
             uint32_t btn_time = platform_get_button_press_time();
+            hal_set_leds(BMLITE_LED_STATUS_READY,0);
             if (btn_time < 200) {
                 // nothing hapened
             } else if (btn_time < 5000) {
@@ -124,19 +107,13 @@ int main (int argc, char **argv)
                 res = bep_save_template(&hcp_chain, current_id++);
             } else {
                 // Erase All templates
-                platform_set_led(BMLITE_LED_STATUS_DELETE_TEMPLATES);
-                hal_timebase_busy_wait(500);
+                hal_set_leds(BMLITE_LED_STATUS_DELETE_TEMPLATES, true);
                 res = bep_delete_template(&hcp_chain, REMOVE_ID_ALL_TEMPLATES);
             }
             res = bep_identify_finger(&hcp_chain, &template_id, &match);
             if (res != FPC_BEP_RESULT_OK)
                 continue;
-            if (match) {
-                platform_set_led(BMLITE_LED_STATUS_MATCH);
-            } else {
-                platform_set_led(BMLITE_LED_STATUS_NOMATCH);
-            }
-            hal_timebase_busy_wait(500);
+            hal_set_leds(BMLITE_LED_STATUS_MATCH, match);
         }
     }
 }
