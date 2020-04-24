@@ -26,12 +26,6 @@ void hal_board_init(uint32_t speed_hz);
 void hal_bmlite_reset(bool state);
 
 /*
- * @brief Init SPI interface
- * @param[in] SPI CLK speed
- */
-void hal_bmlite_spi_init(uint32_t speed_hz);
-
-/*
  * @brief SPI write-read
  * @param[in] Write buffer
  * @param[in] Read buffer

@@ -94,7 +94,7 @@ fpc_bep_result_t hal_bmlite_spi_write_read(uint8_t *write, uint8_t *read, size_t
 	return FPC_BEP_RESULT_OK;
 }
 
-void hal_bmlite_spi_init(uint32_t speed_hz)
+void nordic_bmlite_spi_init(uint32_t speed_hz)
 {
     //spi_config.ss_pin   = BMLITE_CS_PIN;
 	spi_config.miso_pin = BMLITE_MISO_PIN;

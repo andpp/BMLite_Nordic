@@ -33,7 +33,9 @@
 
 static volatile bool sensor_interrupt = false;
 
-static void nordic_bmlite_gpio_init    (void);
+static void nordic_bmlite_gpio_init(void);
+void nordic_bmlite_spi_init(uint32_t speed_hz);
+
 
 void hal_board_init(uint32_t speed_hz)
 {
@@ -50,7 +52,7 @@ void hal_board_init(uint32_t speed_hz)
 	NRF_USBD->ENABLE = 1;
 
     nordic_bmlite_gpio_init();
-    hal_bmlite_spi_init(speed_hz);
+    nordic_bmlite_spi_init(speed_hz);
     bsp_board_init(BSP_INIT_LEDS | BSP_INIT_BUTTONS);
 
 }
