@@ -26,7 +26,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-#include "fpc_com_result.h"
+#include "fpc_bep_types.h"
 
 /**
  * @brief LED status.
@@ -64,7 +64,7 @@ void platform_bmlite_reset(void);
  *
  * @return ::fpc_com_result_t
  */
-fpc_com_result_t platform_bmlite_send(uint16_t size, const uint8_t *data, uint32_t timeout,
+fpc_bep_result_t platform_bmlite_send(uint16_t size, const uint8_t *data, uint32_t timeout,
         void *session);
 
 /**
@@ -76,7 +76,7 @@ fpc_com_result_t platform_bmlite_send(uint16_t size, const uint8_t *data, uint32
  *
  * @return ::fpc_com_result_t
  */
-fpc_com_result_t platform_bmlite_receive(uint16_t size, uint8_t *data, uint32_t timeout,
+fpc_bep_result_t platform_bmlite_receive(uint16_t size, uint8_t *data, uint32_t timeout,
         void *session);
 
 /**
@@ -95,5 +95,13 @@ void platform_sw_reset(void) __attribute__((__noreturn__));
  * @return Button press time in milli seconds.
  */
 uint32_t platform_get_button_press_time(void);
+
+/**
+ * @brief Check if button was pressed and released.
+ *
+ * @return Button press time in milli seconds.
+ */
+uint32_t platform_check_button_pressed(void);
+
 
 #endif /* PLATFORM_H */

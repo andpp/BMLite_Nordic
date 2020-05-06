@@ -13,7 +13,8 @@
             },
             "problemMatcher": {
                 "base": "$gcc",
-                "fileLocation": ["relative", "${workspaceFolder}/BMLite_example", "absolute"]
+//                "fileLocation": ["absolute", "${workspaceFolder}/MBLite_exapmle"]
+                "fileLocation": ["relative", "${workspaceFolder}/BMLite_example"]
             },
             "group": {
                 "kind": "build",

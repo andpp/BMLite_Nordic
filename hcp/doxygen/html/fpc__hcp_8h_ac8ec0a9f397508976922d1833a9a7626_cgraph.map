@@ -1,4 +1,0 @@
-<map id="fpc_hcp_transmit" name="fpc_hcp_transmit">
-<area shape="rect" id="node2" href="$fpc__hcp_8c.html#a0c5716b3b2adf3204cf135d9ddaa3688" title="Handle transmit chunks. " alt="" coords="176,5,295,32"/>
-<area shape="rect" id="node3" href="$fpc__hcp_8c.html#a144fab9621ae9cd7abb8e3660b20265f" title="Calculate serialized packet size. " alt="" coords="343,5,467,32"/>
-</map>

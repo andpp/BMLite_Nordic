@@ -45,6 +45,9 @@ CFLAGS +=\
         -mthumb	\
 	-g \
 
+CFLAGS +=\
+	-DBMLITE_USE_CALLBACK
+
 	#-Og\
 	
 #	-g3\
@@ -69,8 +72,7 @@ PATH_INC += inc
 
 C_INC = $(addprefix -I,$(PATH_INC))
 
-# Include HCP
-include $(HCP_PATH)/hcp.mk
+# Include HAL
 include $(MCUHAL_PATH)/nordic.mk
 
 # Object files and search paths

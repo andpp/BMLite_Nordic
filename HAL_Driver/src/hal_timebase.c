@@ -121,3 +121,9 @@ uint32_t platform_get_button_press_time()
     button_pressed_time = 0;
     return time;
 }
+
+uint32_t platform_check_button_pressed()
+{
+    uint32_t time = button_pressed_time;
+    return time;
+}

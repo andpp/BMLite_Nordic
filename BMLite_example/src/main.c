@@ -27,10 +27,24 @@
 #include <unistd.h>
 #include <string.h>
 
-#include "bep_host_if.h"
-#include "com_common.h"
+#include "bmlite_if.h"
+#include "hcp_tiny.h"
 #include "platform.h"
 #include "bmlite_hal.h"
+
+#define DATA_BUFFER_SIZE (1024*5)
+static uint8_t hcp_txrx_buffer[MTU];
+static uint8_t hcp_data_buffer[DATA_BUFFER_SIZE];
+
+static HCP_comm_t hcp_chain = {
+    .read = platform_bmlite_receive,
+    .write = platform_bmlite_send,
+    .pkt_buffer = hcp_data_buffer,
+    .txrx_buffer = hcp_txrx_buffer,
+    .pkt_size = 0,
+    .pkt_size_max = sizeof(hcp_data_buffer),
+    .phy_rx_timeout = 2000,
+};
 
 void bmlite_on_error(bmlite_error_t error, int32_t value)
 {
@@ -76,14 +90,7 @@ void bmlite_on_identify_start()
 int main (int argc, char **argv)
 {
     int baudrate = 4000000;
-    uint8_t buffer[512];
-    uint16_t size[2] = { 256, 256 };
-    fpc_com_chain_t hcp_chain;
-
     platform_init(baudrate);
-
-    init_com_chain(&hcp_chain, buffer, size, NULL);
-    hcp_chain.channel = 1;
 
     {
         char version[100];
@@ -104,15 +111,19 @@ int main (int argc, char **argv)
             } else if (btn_time < 5000) {
                 // Enroll
                 res = bep_enroll_finger(&hcp_chain);
-                res = bep_save_template(&hcp_chain, current_id++);
+                res = bep_template_save(&hcp_chain, current_id++);
             } else {
                 // Erase All templates
                 hal_set_leds(BMLITE_LED_STATUS_DELETE_TEMPLATES, true);
-                res = bep_delete_template(&hcp_chain, REMOVE_ID_ALL_TEMPLATES);
+                res = bep_template_remove_all(&hcp_chain);
+                current_id = 0;
             }
-            res = bep_identify_finger(&hcp_chain, &template_id, &match);
-            if (res != FPC_BEP_RESULT_OK)
+            res = bep_identify_finger(&hcp_chain, 0, &template_id, &match);
+            if (res == FPC_BEP_RESULT_TIMEOUT) {
+                platform_bmlite_reset();
+            } else if (res != FPC_BEP_RESULT_OK) {
                 continue;
+            }
             hal_set_leds(BMLITE_LED_STATUS_MATCH, match);
         }
     }
