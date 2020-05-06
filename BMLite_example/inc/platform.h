@@ -29,20 +29,6 @@
 #include "fpc_bep_types.h"
 
 /**
- * @brief LED status.
- *
- * Different LED status.
- */
-typedef enum {
-    BMLITE_LED_STATUS_READY = 0,
-    BMLITE_LED_STATUS_MATCH,
-    BMLITE_LED_STATUS_WAITTOUCH,
-    BMLITE_LED_STATUS_ENROLL,
-    BMLITE_LED_STATUS_DELETE_TEMPLATES,
-    BMLITE_LED_STATUS_ERROR,
-} platform_led_status_t;
-
-/**
  * @brief Initializes board
  *
  * @param[in]       speed_hz    Baudrate.
@@ -88,20 +74,5 @@ void platform_halt_if_debug(void);
  * @brief Performs a software reset.
  */
 void platform_sw_reset(void) __attribute__((__noreturn__));
-
-/**
- * @brief Get button press time.
- *
- * @return Button press time in milli seconds.
- */
-uint32_t platform_get_button_press_time(void);
-
-/**
- * @brief Check if button was pressed and released.
- *
- * @return Button press time in milli seconds.
- */
-uint32_t platform_check_button_pressed(void);
-
 
 #endif /* PLATFORM_H */

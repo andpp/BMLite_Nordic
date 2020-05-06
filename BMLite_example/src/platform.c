@@ -57,7 +57,7 @@ fpc_bep_result_t platform_bmlite_receive(uint16_t size, uint8_t *data, uint32_t 
     // Wait for BM_Lite Ready for timeout or indefinitely if timeout is 0
     while (!hal_bmlite_get_status() &&
     		(!timeout || (curr_time = hal_timebase_get_tick()) - start_time < timeout)) {
-                if(platform_check_button_pressed()) {
+                if(hal_check_button_pressed()) {
                     return FPC_BEP_RESULT_TIMEOUT;
                 }
     }
@@ -67,5 +67,10 @@ fpc_bep_result_t platform_bmlite_receive(uint16_t size, uint8_t *data, uint32_t 
 
     uint8_t buff[size];
     return hal_bmlite_spi_write_read(buff, data, size, false);
+}
+
+__attribute__((weak)) uint32_t hal_check_button_pressed()
+{
+    return 0;
 }
 

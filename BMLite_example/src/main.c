@@ -104,7 +104,7 @@ int main (int argc, char **argv)
 
         while (1)
         {
-            uint32_t btn_time = platform_get_button_press_time();
+            uint32_t btn_time = hal_get_button_press_time();
             hal_set_leds(BMLITE_LED_STATUS_READY,0);
             if (btn_time < 200) {
                 // nothing hapened

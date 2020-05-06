@@ -8,8 +8,24 @@
 #ifndef BMLITE_H
 #define BMLITE_H
 
+#include <stddef.h>
+
 #include "fpc_bep_types.h"
-#include "platform.h"
+
+/**
+ * @brief LED status.
+ *
+ * Different LED status.
+ */
+typedef enum {
+    BMLITE_LED_STATUS_READY = 0,
+    BMLITE_LED_STATUS_MATCH,
+    BMLITE_LED_STATUS_WAITTOUCH,
+    BMLITE_LED_STATUS_ENROLL,
+    BMLITE_LED_STATUS_DELETE_TEMPLATES,
+    BMLITE_LED_STATUS_ERROR,
+} platform_led_status_t;
+
 
 /*
  * @brief Board initialization
@@ -63,17 +79,25 @@ uint32_t hal_timebase_get_tick(void);
  */
 void hal_timebase_busy_wait(uint32_t ms);
 
-/*
+/**
  *  Optional functions for Buttons & Leds control
  */
 
-/*
+/**
  * @brief Get button press time (msec)
+ * 
  * @return ::uint32_t
  */
-uint32_t hal_get_button_press_time();
+uint32_t hal_get_button_press_time(void);
 
-/*
+/**
+ * @brief Check if button was pressed and released.
+ *
+ * @return Button press time in milli seconds.
+ */
+uint32_t hal_check_button_pressed(void);
+
+/**
  * @brief Set LED(s) status
  * @param[in] Status
  * @param[in] Status modifier
