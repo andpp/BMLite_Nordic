@@ -17,8 +17,8 @@ Platform-independent interface implemented in [platform.c](BMLite_example/src/pl
 | :-------- | :-------- |
 | bool **platform_init**(uint32_t speed_hz) |  Initilalizes hardware |
 | void **platform_bmlite_reset**(void) | Implements BM-Lite HW Reset |
-| fpc_bep_result_t**platform_bmlite_send**(uint16_t size, const uint8_t *data, uint32_t timeout, void *session) | Send data packet to FPC BM-LIte (session parameter is for compatibility and can be safely ignored) |
-| fpc_bep_result_t**platform_bmlite_receive**(uint16_t size, uint8_t *data, uint32_t timeout, void *session) | Receive data packet from FPC BM-LIte (session parameter is for compatibility and can be safely ignored) |
+| fpc_bep_result_t **platform_bmlite_send**(uint16_t size, const uint8_t *data, uint32_t timeout, void *session) | Send data packet to FPC BM-LIte (session parameter is for compatibility and can be safely ignored) |
+| fpc_bep_result_t **platform_bmlite_receive**(uint16_t size, uint8_t *data, uint32_t timeout, void *session) | Receive data packet from FPC BM-LIte (session parameter is for compatibility and can be safely ignored) |
 
 Currently **platform_bmlite_send()** and **platform_bmlite_receive()** are implemented for SPI interface. For UART interface there is no need to wait **IRQ** pin ready. However because in UART mode there is no signal from FPC-BM-LIte that it will send data, I would recommend to use UART interrupt or DMA to receive data from UART and store it to a separate buffer and read data in **platform_bmlite_receive()** from that buffer. Activation UART data reading only inside **platform_bmlite_receive()** could lead to loosing some incoming data and causing HCP protocol errors.
 
@@ -53,3 +53,4 @@ For porting the project to a new microcontroller, all functions from [bmlite_hal
 
 - BM-Lite support both UART and SPI communication interface. BM-Lite automatically detects the specific communication interface in use. However, it is not possible to use both interfaces at the same time! 
 - **IRQ** pin is used in SPI mode only as FPC BM-Lite Ready-to-Transmit signal. The module set it to **High** when it has some data to send and set it to **Low** when data packet is sent.
+
