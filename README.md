@@ -4,7 +4,6 @@ This is a port of [FPC BM-Lite Development Kit](https://www.fingerprints.com/sol
 
 There are 3 main folders in the project:
 - [BMLite_example](BMLite_example) - main HW-independed application
-- [hcp](hcp) - implementation of HCP protocol
 - [HAL_Driver](HAL_Driver) - implementation of HW-dependent functions
 
 ------------
@@ -45,7 +44,7 @@ For porting the project to a new microcontroller, all functions from [bmlite_hal
 |  HAL Function |  Description |
 | :------------ | :------------ |
 | uint32_t **hal_get_button_press_time**(void) | How long UI button was pressed last time. Also it should reset button pressed time counter |
-| uint32_t **hal_check_button_pressed**(void) | Used for breaking waiting in **platform_bmlite_receive()** if returns not 0 |
+| uint32_t **hal_check_button_pressed**(void) | Used for breaking waiting in **platform_bmlite_receive()** if returns non-zero |
 | void **hal_set_leds**(platform_led_status_t status, uint16_t mode) | Set LED(s) state according to status and mode. |
 
 ------------
