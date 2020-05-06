@@ -38,25 +38,94 @@ typedef struct {
 } HCP_comm_t;
 
 /**
- * @brief Helper function for receiving HCP commands
+ * @brief Send prepared command packet to FPC BM-LIte
+ * 
+ * @param[in] hcp_comm - pointer to HCP_comm struct
+ * 
+ * @return ::fpc_bep_result_t
+ */
+fpc_bep_result_t bmlite_send(HCP_comm_t *hcp_comm);
 
- * @param command_id command to send
- * @param arg_key1 first key to receive
- * @param arg_data1 first argument data
- * @param arg_data1_length first argument data length
- * @param arg_key2 second key to receive
- * @param arg_data2 second argument data
- * @param arg_data2_length second argument
+/**
+ * @brief Receive answer from FPC BM-LIte
+ * 
+ * @param[in] hcp_comm - pointer to HCP_comm struct
+ * 
  * @return ::fpc_bep_result_t
  */
 fpc_bep_result_t bmlite_receive(HCP_comm_t *hcp_comm);
-fpc_bep_result_t bmlite_send(HCP_comm_t *hcp_comm);
+
+/**
+ * @brief Send prepared command packet to FPC BM-LIte and receive answer
+ * 
+ * @param[in] hcp_comm - pointer to HCP_comm struct
+ * 
+ *   Returns result of executing command in BM-LIte in hcp_comm->bep_result
+ *   if communication with BM-Lite was successful.
+ *   Please not that some BM-Lite command does not return result in ARG_RESULT.
+ *   They return data with some other argument instead.
+ * 
+ * @return ::fpc_bep_result_t
+ */
 fpc_bep_result_t bmlite_tranceive(HCP_comm_t *hcp_comm);
 
+/**
+ * @brief Initialize new command for BM-Lite
+ *
+ * @param[in] hcp_comm     - pointer to HCP_comm struct
+ * @param[in] cmd          - command to send
+ * @param[in] arg          - Argument for the command without parameterd
+ *                           Use ARG_NONE and add arguments by bmlite_add_arg() if 
+     *                       you need to add argument with parameter
+ * 
+ * @return ::fpc_bep_result_t
+ */
 fpc_bep_result_t bmlite_init_cmd(HCP_comm_t *hcp_comm, uint16_t cmd, uint16_t arg);
-fpc_bep_result_t bmlite_add_arg(HCP_comm_t *hcp_comm, uint16_t arg, void *data, uint16_t size);
+
+/**
+ * @brief  Add argument to command. 
+ *         Must be used only after command buffer is initialized by bmlite_init_cmd()
+ * 
+ * @param[in] hcp_comm     - pointer to HCP_comm struct
+ * @param[in] arg_type     - argument key
+ * @param[in] arg_data     - argument data
+ * @param[in] arg_size     - argument data length
+ * 
+ * @return ::fpc_bep_result_t
+ */
+fpc_bep_result_t bmlite_add_arg(HCP_comm_t *hcp_comm, uint16_t arg_type, void *arg_data, uint16_t arg_size);
+
+/**
+ * @brief  Search for argument in received answer. 
+ * 
+ * @param[in] hcp_comm     - pointer to HCP_comm struct
+ * @param[in] arg_type     - argument key
+ * 
+ *  If found, place pointer to argument data in receiving buffer to hcp_comm->arg.data
+ *  and size of the argument in hcp_comm->arg.size
+ * 
+ * @return ::fpc_bep_result_t
+ */
 fpc_bep_result_t bmlite_get_arg(HCP_comm_t *hcp_comm, uint16_t arg_type);
-fpc_bep_result_t bmlite_copy_arg(HCP_comm_t *hcp_comm, uint16_t arg_key, void *arg_data, uint16_t arg_data_length);
+
+/**
+ * @brief  Search for argument in received answer and copyargument's data
+ *         to 
+ * 
+ * @param[in] hcp_comm        - pointer to HCP_comm struct
+ * @param[in] arg_type        - argument key
+ * @param[out] arg_data       - pointer for memory to copy argument value
+ * @param[out] arg_data_size  - size of data area for copying argument value
+ * 
+ *  If found, argument's data will be copyed to arg_data
+ *  If received argument's size greater that arg_data_size, the copyed data will be
+ *  truncated to arg_data_size. 
+ *  Still hcp_comm->arg.data will be pointed to argument's data in receiving buffer
+ *  and real size of the argument will be hcp_comm->arg.size
+ * 
+ * @return ::fpc_bep_result_t
+ */
+fpc_bep_result_t bmlite_copy_arg(HCP_comm_t *hcp_comm, uint16_t arg_key, void *arg_data, uint16_t arg_data_size);
 
 
 

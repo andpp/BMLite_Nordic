@@ -61,21 +61,21 @@ fpc_bep_result_t bmlite_init_cmd(HCP_comm_t *hcp_comm, uint16_t cmd, uint16_t ar
     return FPC_BEP_RESULT_OK;
 }
 
-fpc_bep_result_t bmlite_add_arg(HCP_comm_t *hcp_comm, uint16_t arg, void *data, uint16_t size)
+fpc_bep_result_t bmlite_add_arg(HCP_comm_t *hcp_comm, uint16_t arg_type, void *arg_data, uint16_t arg_size)
 {
-    if(hcp_comm->pkt_size + 4 + size > hcp_comm->pkt_size_max) {
+    if(hcp_comm->pkt_size + 4 + arg_size > hcp_comm->pkt_size_max) {
         bmlite_on_error(BMLITE_ERROR_SEND_CMD, FPC_BEP_RESULT_NO_MEMORY);
         return FPC_BEP_RESULT_NO_MEMORY;
     }
 
     ((_HCP_cmd_t *)hcp_comm->pkt_buffer)->args_nr++;
     _CMD_arg_t *args = (_CMD_arg_t *)(&hcp_comm->pkt_buffer[hcp_comm->pkt_size]);
-    args->arg = arg;
-    args->size = size;
-    if(size) {
-        memcpy(&args->pld, data, size);
+    args->arg = arg_type;
+    args->size = arg_size;
+    if(arg_size) {
+        memcpy(&args->pld, arg_data, arg_size);
     }
-    hcp_comm->pkt_size += 4 + size;
+    hcp_comm->pkt_size += 4 + arg_size;
     return FPC_BEP_RESULT_OK;
 }
 
@@ -104,7 +104,7 @@ fpc_bep_result_t bmlite_get_arg(HCP_comm_t *hcp_comm, uint16_t arg_type)
     return FPC_BEP_RESULT_INVALID_ARGUMENT;
 }
 
-fpc_bep_result_t bmlite_copy_arg(HCP_comm_t *hcp_comm, uint16_t arg_key, void *arg_data, uint16_t arg_data_length)
+fpc_bep_result_t bmlite_copy_arg(HCP_comm_t *hcp_comm, uint16_t arg_key, void *arg_data, uint16_t arg_data_size)
 {
     fpc_bep_result_t bep_result;
     bep_result = bmlite_get_arg(hcp_comm, arg_key);
@@ -113,7 +113,7 @@ fpc_bep_result_t bmlite_copy_arg(HCP_comm_t *hcp_comm, uint16_t arg_key, void *a
             bmlite_on_error(BMLITE_ERROR_GET_ARG, FPC_BEP_RESULT_NO_MEMORY);
             return FPC_BEP_RESULT_NO_MEMORY;
         }
-        memcpy(arg_data, hcp_comm->arg.data, HCP_MIN(arg_data_length, hcp_comm->arg.size));
+        memcpy(arg_data, hcp_comm->arg.data, HCP_MIN(arg_data_size, hcp_comm->arg.size));
     } else {
         bmlite_on_error(BMLITE_ERROR_GET_ARG, FPC_BEP_RESULT_INVALID_ARGUMENT);
         return FPC_BEP_RESULT_INVALID_ARGUMENT;
