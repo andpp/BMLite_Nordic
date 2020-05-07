@@ -109,8 +109,8 @@ fpc_bep_result_t bmlite_add_arg(HCP_comm_t *hcp_comm, uint16_t arg_type, void *a
 fpc_bep_result_t bmlite_get_arg(HCP_comm_t *hcp_comm, uint16_t arg_type);
 
 /**
- * @brief  Search for argument in received answer and copyargument's data
- *         to 
+ * @brief  Search for argument in received answer and copy argument's data
+ *         to arg_data 
  * 
  * @param[in] hcp_comm        - pointer to HCP_comm struct
  * @param[in] arg_type        - argument key
