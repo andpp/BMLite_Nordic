@@ -17,8 +17,9 @@
 #ifndef FPC_BEP_TYPES_H
 #define FPC_BEP_TYPES_H
 
+#include <stdint.h>
 #include <stdbool.h>
-
+#include <stddef.h>
 /**
  * @file    fpc_bep_types.h
  * @brief   Biometric Embedded Platform types.

@@ -31,9 +31,9 @@
 /**
  * @brief Initializes board
  *
- * @param[in]       speed_hz    Baudrate.
+ * @param[in] params  - pointer to additional parameters.
  */
-bool platform_init(uint32_t speed_hz);
+fpc_bep_result_t platform_init(void *params);
 
 /**
  * @brief Does BM-Lite HW Reset

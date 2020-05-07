@@ -27,6 +27,7 @@ OUT := out
 DEPTH := 
 HCP_PATH := ../hcp
 MCUHAL_PATH := ../HAL_Driver
+BMLITE_PATH := ../BMLite_sdk
 
 # Main target
 TARGET := $(OUT)/$(PRODUCT)
@@ -72,6 +73,8 @@ PATH_INC += inc
 
 C_INC = $(addprefix -I,$(PATH_INC))
 
+# Include BM-Lite SDK
+include $(BMLITE_PATH)/bmlite.mk
 # Include HAL
 include $(MCUHAL_PATH)/nordic.mk
 

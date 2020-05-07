@@ -7,9 +7,10 @@
 #include "bmlite_if_callbacks.h"
 
 #define MAX_CAPTURE_ATTEMPTS 15
+#define MAX_SINGLE_CAPTURE_ATTEMPTS 3
 #define CAPTURE_TIMEOUT 3000
 
-#define exit_if_err(c) { bep_result = c; if(bep_result) goto exit; }
+#define exit_if_err(c) { bep_result = c; if(bep_result || chain->bep_result) goto exit; }
 
 #define assert(c)  { fpc_bep_result_t res = c; if(res) return res; }
 
@@ -79,7 +80,11 @@ fpc_bep_result_t bep_capture(HCP_comm_t *chain, uint16_t timeout)
 
     bmlite_on_start_capture();
     chain->phy_rx_timeout = timeout;
-    bep_result = bmlite_send_cmd_arg(chain, CMD_CAPTURE, ARG_NONE, ARG_TIMEOUT, &timeout, sizeof(timeout));
+    for(int i=0; i< MAX_SINGLE_CAPTURE_ATTEMPTS; i++) {
+        bep_result = bmlite_send_cmd_arg(chain, CMD_CAPTURE, ARG_NONE, ARG_TIMEOUT, &timeout, sizeof(timeout));
+        if( !(bep_result || chain->bep_result))
+            break;
+    }
     chain->phy_rx_timeout = prev_timeout;
     bmlite_on_finish_capture();
 

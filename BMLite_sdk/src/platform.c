@@ -24,13 +24,15 @@
 #include "platform.h"
 #include "bmlite_hal.h"
 
-bool platform_init(uint32_t speed_hz)
+fpc_bep_result_t platform_init(void *params)
 {
-    hal_board_init(4000000);
-    hal_timebase_init();
-
-    platform_bmlite_reset();
-    return true;
+    fpc_bep_result_t result;
+    result = hal_board_init(params);
+    if(result == FPC_BEP_RESULT_OK) {
+        hal_timebase_init();
+        platform_bmlite_reset();
+    }
+    return result;
 }
 
 void platform_bmlite_reset(void)

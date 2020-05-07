@@ -20,6 +20,7 @@
                 "/usr/arm-none-eabi/include/c++/7.3.1/arm-none-eabi",
                 "/usr/arm-none-eabi/include/c++/7.3.1/backward",
                 "${workspaceFolder}/BMLite_example/inc",
+                "${workspaceFolder}/BMLite_sdk/inc",
                 "${workspaceFolder}/HAL_Driver/CMSIS/Include",
                 "${workspaceFolder}/HAL_Driver/inc",
                 "${workspaceFolder}/HAL_Driver/sdk",

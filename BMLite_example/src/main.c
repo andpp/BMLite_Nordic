@@ -89,8 +89,7 @@ void bmlite_on_identify_start()
 
 int main (int argc, char **argv)
 {
-    int baudrate = 4000000;
-    platform_init(baudrate);
+    platform_init(NULL);
 
     {
         char version[100];

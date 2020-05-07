@@ -1,5 +1,5 @@
 /**
- * @file   bmlite.h
+ * @file   bmlite_hal.h
  * @brief  BM-Lite HAL functions.
  * 
  *    All functions must be implemented in order to support BM-Lite on a Board
@@ -8,9 +8,17 @@
 #ifndef BMLITE_H
 #define BMLITE_H
 
+#include <stdint.h>
+#include <stdbool.h>
 #include <stddef.h>
 
 #include "fpc_bep_types.h"
+
+#ifdef __arm__
+typedef uint32_t hal_tick_t;
+#else 
+typedef uint64_t hal_tick_t;
+#endif
 
 /**
  * @brief LED status.
@@ -29,10 +37,10 @@ typedef enum {
 
 /*
  * @brief Board initialization
- * @param[in] SPI CLK speed
+ * @param[in] params  - pointer to additional parameters
  */
 
-void hal_board_init(uint32_t speed_hz);
+fpc_bep_result_t hal_board_init(void *params);
 
 /*
  * @brief Control BM-Lite Reset pin
@@ -68,7 +76,7 @@ void hal_timebase_init(void);
  *
  * @return Tick count since hal_timebase_init() call. [ms]
  */
-uint32_t hal_timebase_get_tick(void);
+hal_tick_t hal_timebase_get_tick(void);
 
 /**
  * @brief Busy wait.

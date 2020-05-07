@@ -37,9 +37,10 @@ static void nordic_bmlite_gpio_init(void);
 void nordic_bmlite_spi_init(uint32_t speed_hz);
 
 
-void hal_board_init(uint32_t speed_hz)
+fpc_bep_result_t hal_board_init(void *params)
 {
-
+    (void)params;
+    
 	if (NRF_UICR->REGOUT0 != UICR_REGOUT0_VOUT_3V3)
 	{
 	    NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Wen << NVMC_CONFIG_WEN_Pos;
@@ -52,9 +53,10 @@ void hal_board_init(uint32_t speed_hz)
 	NRF_USBD->ENABLE = 1;
 
     nordic_bmlite_gpio_init();
-    nordic_bmlite_spi_init(speed_hz);
+    nordic_bmlite_spi_init(4000000);
     bsp_board_init(BSP_INIT_LEDS | BSP_INIT_BUTTONS);
 
+    return FPC_BEP_RESULT_OK;
 }
 
 void hal_bmlite_reset(bool state)
