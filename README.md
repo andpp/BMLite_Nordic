@@ -4,20 +4,21 @@ This is a port of [FPC BM-Lite Development Kit](https://www.fingerprints.com/sol
 
 There are 3 main folders in the project:
 - [BMLite_example](BMLite_example) - main HW-independed application
+- [BMLite_sdk](BMLite_sdk) - FPC BM-Lite SDK
 - [HAL_Driver](HAL_Driver) - implementation of HW-dependent functions
 
 ------------
 
 ### Platform-independent interface functions
 
-Platform-independent interface implemented in [platform.c](BMLite_example/src/platform.c)
+Platform-independent interface implemented in [platform.c](BMLite_sdk/src/platform.c)
 
 | Platform function | Description  |
 | :-------- | :-------- |
-| bool **platform_init**(uint32_t speed_hz) |  Initilalizes hardware |
+| fpc_bep_result_t **platform_init**(void *params) |  Initilalizes hardware |
 | void **platform_bmlite_reset**(void) | Implements BM-Lite HW Reset |
-| fpc_bep_result_t **platform_bmlite_send**(uint16_t size, const uint8_t *data, uint32_t timeout, void *session) | Send data packet to FPC BM-LIte |
-| fpc_bep_result_t **platform_bmlite_receive**(uint16_t size, uint8_t *data, uint32_t timeout, void *session) | Receive data packet from FPC BM-LIte. If timeout = **0**, the function will wait for data from BM-Lite indefinitely. The waiting loop will be breaked if **hal_check_button_pressed()** returns non-zero value. It is recommended to do HW or SW reset of BM-Lite if **platform_bmlite_receive()** returns **FPC_BEP_RESULT_TIMEOUT** in order to return is into known state. |
+| fpc_bep_result_t **platform_bmlite_send**(uint16_t size, const uint8_t *data, uint32_t timeout, void *session) | Send data packet to FPC BM-Lite |
+| fpc_bep_result_t **platform_bmlite_receive**(uint16_t size, uint8_t *data, uint32_t timeout, void *session) | Receive data packet from FPC BM-Lite. If timeout = **0**, the function will wait for data from BM-Lite indefinitely. The waiting loop will be breaked if **hal_check_button_pressed()** returns non-zero value. It is recommended to do HW or SW reset of BM-Lite if **platform_bmlite_receive()** returns **FPC_BEP_RESULT_TIMEOUT** in order to return is into known state. |
 
 Currently **platform_bmlite_send()** and **platform_bmlite_receive()** are implemented for SPI interface. For UART interface there is no need to wait for **IRQ** pin ready. However because in UART mode there is no signal from FPC-BM-LIte that it will send data, I would recommend to use UART interrupt or DMA to receive data from UART and store it to a separate buffer and read data in **platform_bmlite_receive()** from that buffer. Activation UART data reading only inside **platform_bmlite_receive()** could lead to loosing some incoming data and causing HCP protocol errors.
 
@@ -25,13 +26,13 @@ Currently **platform_bmlite_send()** and **platform_bmlite_receive()** are imple
 
 ### HAL implementation
 
-For porting the project to a new microcontroller, all functions from [bmlite_hal.h](BMLite_example/inc/bmlite_hal.h) should be implemented.
+For porting the project to a new microcontroller, all functions from [bmlite_hal.h](BMLite_sdk/inc/bmlite_hal.h) should be implemented.
 
 #### Functions must be implemented: 
 
 |  HAL Function |  Description |
 | :------------ | :------------ |
-| void **hal_board_init**(uint32_t speed_hz) |  Initialize GPIO, System timer, SPI  |
+| fpc_bep_result_t **hal_board_init**(void *params) |  Initialize GPIO, System timer, SPI  |
 | void **hal_bmlite_reset**(bool state) |  Activate/Deactivate BM-Lite **RST_N** pin (***Active Low***) |
 | fpc_bep_result_t **hal_bmlite_spi_write_read**(uint8_t *write, uint8_t *read, size_t size, bool leave_cs_asserted) |  SPI data exchange |
 | bool **hal_bmlite_get_status**(void) | Return status of BM-Lite **IRQ** pin (***Active High***) |
