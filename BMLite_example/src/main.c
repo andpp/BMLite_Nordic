@@ -124,6 +124,8 @@ int main (int argc, char **argv)
                 continue;
             }
             hal_set_leds(BMLITE_LED_STATUS_MATCH, match);
+            res = sensor_wait_finger_not_present(&hcp_chain, 0);
+
         }
     }
 }

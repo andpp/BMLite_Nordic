@@ -197,9 +197,6 @@ fpc_bep_result_t bep_identify_finger(HCP_comm_t *chain, uint32_t timeout, uint16
         // Delay for possible updating template on BM-Lite
         hal_timebase_busy_wait(50);
     }
-
-    bep_result = sensor_wait_finger_not_present(chain, 0);
-
 exit:
     bmlite_on_identify_finish();
     return bep_result;    
