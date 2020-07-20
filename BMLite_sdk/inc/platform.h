@@ -12,7 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by Andrey Perminov <andrey.ppp@gmail.com> 
+ * for FPC BM-Lite applications
  */
+
 
 #ifndef PLATFORM_H
 #define PLATFORM_H

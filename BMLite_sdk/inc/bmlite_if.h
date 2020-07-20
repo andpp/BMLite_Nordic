@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020 Andrey Perminov <andrey.ppp@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #ifndef BMLITE_IF_H
 #define BMLITE_IF_H
 
@@ -5,33 +21,28 @@
 #include "bmlite_if_callbacks.h"
 
 /**
- * @brief Build and send command to FPC BM-Lite and receive answer
+ * @brief Enroll finger. Created template must be saved to FLASH storage
  *
- * @param[in] chain    - HCP com chain
- * @param[in] cmd      - BM-Lite command
- * @param[in] arg_type - Argument without parameters
- *                       set to ARG_NONE if the command has no argument
+ * @param[in] chain  - HCP com chain
  * 
  * @return ::fpc_bep_result_t
  */
-fpc_bep_result_t bmlite_send_cmd(HCP_comm_t *chain, uint16_t cmd, uint16_t arg_type);
+fpc_bep_result_t bep_enroll_finger(HCP_comm_t *chain);
 
 /**
- * @brief Build and send command with additiona argument with parameters
+ * @brief Capture and identify finger against existing templates in Flash storage
  *
- * @param[in] chain       - HCP com chain
- * @param[in] cmd         - BM-Lite command
- * @param[in] arg1_type   - argument 1 without parameters
- *                          set to ARG_NONE if the command has no argument without paramener
- * @param[in] arg2_type   - argument 2
- * @param[in] arg2_data   - data pointer for argument 2
- *                          set to 0 if argument 2 has no parameter
- * @param[in] arg2_length - length of data for argument 2
- *                          set to 0 if argument 2 has no parameter
+ * @param[in] chain   - HCP com chain
+ * @param[in] timeout - timeout (msec). Maximum timeout 65535 msec
+ *                      set to 0 for waiting indefinitely
+ * 
+ * @param[out] template_id - pointer for matched template ID
+ * @param[out] match       - pointer to match result
  * 
  * @return ::fpc_bep_result_t
  */
-fpc_bep_result_t bmlite_send_cmd_arg(HCP_comm_t *chain, uint16_t cmd, uint16_t arg1_type, uint16_t arg2_type, void *arg2_data, uint16_t arg2_length);
+fpc_bep_result_t bep_identify_finger(HCP_comm_t *chain, uint32_t timeout, 
+                uint16_t *template_id, bool *match);
 
 /**
  * @brief Wait for finger present on sensor"
@@ -139,30 +150,6 @@ fpc_bep_result_t bep_image_extract(HCP_comm_t *chain);
  * @return ::fpc_bep_result_t
  */
 fpc_bep_result_t bep_identify(HCP_comm_t *chain);
-
-/**
- * @brief Enroll finger. Created template must be saved to FLASH storage
- *
- * @param[in] chain  - HCP com chain
- * 
- * @return ::fpc_bep_result_t
- */
-fpc_bep_result_t bep_enroll_finger(HCP_comm_t *chain);
-
-/**
- * @brief Capture and identify finger against existing templates in Flash storage
- *
- * @param[in] chain   - HCP com chain
- * @param[in] timeout - timeout (msec). Maximum timeout 65535 msec
- *                      set to 0 for waiting indefinitely
- * 
- * @param[out] template_id - pointer for matched template ID
- * @param[out] match       - pointer to match result
- * 
- * @return ::fpc_bep_result_t
- */
-fpc_bep_result_t bep_identify_finger(HCP_comm_t *chain, uint32_t timeout, 
-                uint16_t *template_id, bool *match);
 
 /**
  * @brief Save template after enroll is finished to FLASH storage
@@ -343,5 +330,36 @@ fpc_bep_result_t bep_uart_speed_get(HCP_comm_t *chain, uint32_t *speed);
  * @return ::fpc_bep_result_t
  */
 fpc_bep_result_t bep_sensor_reset(HCP_comm_t *chain);
+
+/**
+ * @brief Build and send command to FPC BM-Lite and receive answer
+ *
+ * @param[in] chain    - HCP com chain
+ * @param[in] cmd      - BM-Lite command
+ * @param[in] arg_type - Argument without parameters
+ *                       set to ARG_NONE if the command has no argument
+ * 
+ * @return ::fpc_bep_result_t
+ */
+fpc_bep_result_t bmlite_send_cmd(HCP_comm_t *chain, uint16_t cmd, uint16_t arg_type);
+
+/**
+ * @brief Build and send command with additiona argument with parameters
+ *
+ * @param[in] chain       - HCP com chain
+ * @param[in] cmd         - BM-Lite command
+ * @param[in] arg1_type   - argument 1 without parameters
+ *                          set to ARG_NONE if the command has no argument without paramener
+ * @param[in] arg2_type   - argument 2
+ * @param[in] arg2_data   - data pointer for argument 2
+ *                          set to 0 if argument 2 has no parameter
+ * @param[in] arg2_length - length of data for argument 2
+ *                          set to 0 if argument 2 has no parameter
+ * 
+ * @return ::fpc_bep_result_t
+ */
+fpc_bep_result_t bmlite_send_cmd_arg(HCP_comm_t *chain, uint16_t cmd, uint16_t arg1_type, uint16_t arg2_type, void *arg2_data, uint16_t arg2_length);
+
+
 
 #endif

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020 Andrey Perminov <andrey.ppp@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include "hcp_tiny.h"
 #include "bmlite_if.h"
 #include "bmlite_hal.h"
@@ -33,18 +49,73 @@ __attribute__((weak)) void bmlite_on_identify_start() {}
 __attribute__((weak)) void bmlite_on_identify_finish() {}
 #endif
 
-fpc_bep_result_t bmlite_send_cmd(HCP_comm_t *chain, uint16_t cmd, uint16_t arg_type)
+fpc_bep_result_t bep_enroll_finger(HCP_comm_t *chain)
 {
-    assert(bmlite_init_cmd(chain, cmd, arg_type));
-    return bmlite_tranceive(chain);
+    uint32_t samples_remaining = 0;
+    fpc_bep_result_t bep_result = FPC_BEP_RESULT_OK;
+    bool enroll_done = false;
+
+    bmlite_on_start_enroll();
+    /* Enroll start */
+    exit_if_err(bmlite_send_cmd(chain, CMD_ENROLL, ARG_START));
+    
+    for (uint8_t i = 0; i < MAX_CAPTURE_ATTEMPTS; ++i) {
+
+        bmlite_on_start_enrollcapture();
+        bep_result = bep_capture(chain, CAPTURE_TIMEOUT);
+        bmlite_on_finish_enrollcapture();
+
+        if (bep_result != FPC_BEP_RESULT_OK) {
+            continue;
+        }
+
+        /* Enroll add */
+        bep_result = bmlite_send_cmd(chain, CMD_ENROLL, ARG_ADD);
+        if (bep_result != FPC_BEP_RESULT_OK) {
+            continue;
+        }
+
+        bmlite_get_arg(chain, ARG_COUNT);
+        samples_remaining = *(uint32_t *)chain->arg.data;
+//      DEBUG("Enroll samples remaining: %d\n", samples_remaining);
+
+        /* Break enrolling if we can't collect enough correct images for enroll*/
+        if (samples_remaining == 0U) {
+            enroll_done = true;
+            break;
+        }
+
+        sensor_wait_finger_not_present(chain, 0);
+    }
+
+    bep_result = bmlite_send_cmd(chain, CMD_ENROLL, ARG_FINISH);
+
+exit:
+    bmlite_on_finish_enroll();
+    return (!enroll_done) ? FPC_BEP_RESULT_GENERAL_ERROR : bep_result;
 }
 
-fpc_bep_result_t bmlite_send_cmd_arg(HCP_comm_t *chain, uint16_t cmd, uint16_t arg1_type, uint16_t arg2_type, void *arg2_data, uint16_t arg2_length)
+fpc_bep_result_t bep_identify_finger(HCP_comm_t *chain, uint32_t timeout, uint16_t *template_id, bool *match)
 {
-    assert(bmlite_init_cmd(chain, cmd, arg1_type));
-    assert(bmlite_add_arg(chain, arg2_type, arg2_data, arg2_length));
+    fpc_bep_result_t bep_result;
+    *match = false;
 
-    return bmlite_tranceive(chain);
+    bmlite_on_identify_start();
+
+    exit_if_err(bep_capture(chain, timeout));
+    exit_if_err(bep_image_extract(chain));
+    exit_if_err(bep_identify(chain));
+    exit_if_err(bmlite_get_arg(chain, ARG_MATCH));
+    *match = *(bool *)chain->arg.data;
+    if(*match) {
+        bmlite_get_arg(chain, ARG_ID);
+        *template_id = *(uint16_t *)chain->arg.data;
+        // Delay for possible updating template on BM-Lite
+        hal_timebase_busy_wait(50);
+    }
+exit:
+    bmlite_on_identify_finish();
+    return bep_result;    
 }
 
 fpc_bep_result_t sensor_wait_finger_present(HCP_comm_t *chain, uint16_t timeout)
@@ -130,76 +201,6 @@ fpc_bep_result_t bep_image_extract(HCP_comm_t *chain)
 fpc_bep_result_t bep_identify(HCP_comm_t *chain)
 {
    return bmlite_send_cmd(chain, CMD_IDENTIFY, ARG_NONE);
-}
-
-fpc_bep_result_t bep_enroll_finger(HCP_comm_t *chain)
-{
-    uint32_t samples_remaining = 0;
-    fpc_bep_result_t bep_result = FPC_BEP_RESULT_OK;
-    bool enroll_done = false;
-
-    bmlite_on_start_enroll();
-    /* Enroll start */
-    exit_if_err(bmlite_send_cmd(chain, CMD_ENROLL, ARG_START));
-    
-    for (uint8_t i = 0; i < MAX_CAPTURE_ATTEMPTS; ++i) {
-
-        bmlite_on_start_enrollcapture();
-        bep_result = bep_capture(chain, CAPTURE_TIMEOUT);
-        bmlite_on_finish_enrollcapture();
-
-        if (bep_result != FPC_BEP_RESULT_OK) {
-            continue;
-        }
-
-        /* Enroll add */
-        bep_result = bmlite_send_cmd(chain, CMD_ENROLL, ARG_ADD);
-        if (bep_result != FPC_BEP_RESULT_OK) {
-            continue;
-        }
-
-        bmlite_get_arg(chain, ARG_COUNT);
-        samples_remaining = *(uint32_t *)chain->arg.data;
-
-//        log_info("Enroll samples remaining: %d\n", samples_remaining);
-
-        /* Break enrolling if we can't collect enough correct images for enroll*/
-        if (samples_remaining == 0U) {
-            enroll_done = true;
-            break;
-        }
-
-        sensor_wait_finger_not_present(chain, 0);
-    }
-
-    bep_result = bmlite_send_cmd(chain, CMD_ENROLL, ARG_FINISH);
-
-exit:
-    bmlite_on_finish_enroll();
-    return (!enroll_done) ? FPC_BEP_RESULT_GENERAL_ERROR : bep_result;
-}
-
-fpc_bep_result_t bep_identify_finger(HCP_comm_t *chain, uint32_t timeout, uint16_t *template_id, bool *match)
-{
-    fpc_bep_result_t bep_result;
-    *match = false;
-
-    bmlite_on_identify_start();
-
-    exit_if_err(bep_capture(chain, timeout));
-    exit_if_err(bep_image_extract(chain));
-    exit_if_err(bep_identify(chain));
-    exit_if_err(bmlite_get_arg(chain, ARG_MATCH));
-    *match = *(bool *)chain->arg.data;
-    if(*match) {
-        bmlite_get_arg(chain, ARG_ID);
-        *template_id = *(uint16_t *)chain->arg.data;
-        // Delay for possible updating template on BM-Lite
-        hal_timebase_busy_wait(50);
-    }
-exit:
-    bmlite_on_identify_finish();
-    return bep_result;    
 }
 
 fpc_bep_result_t bep_template_save(HCP_comm_t *chain, uint16_t template_id)
@@ -307,4 +308,18 @@ fpc_bep_result_t bep_sensor_reset(HCP_comm_t *chain)
     hal_timebase_busy_wait(50);
 
     return bmlite_send_cmd(chain, CMD_SENSOR, ARG_RESET);    
+}
+
+fpc_bep_result_t bmlite_send_cmd(HCP_comm_t *chain, uint16_t cmd, uint16_t arg_type)
+{
+    assert(bmlite_init_cmd(chain, cmd, arg_type));
+    return bmlite_tranceive(chain);
+}
+
+fpc_bep_result_t bmlite_send_cmd_arg(HCP_comm_t *chain, uint16_t cmd, uint16_t arg1_type, uint16_t arg2_type, void *arg2_data, uint16_t arg2_length)
+{
+    assert(bmlite_init_cmd(chain, cmd, arg1_type));
+    assert(bmlite_add_arg(chain, arg2_type, arg2_data, arg2_length));
+
+    return bmlite_tranceive(chain);
 }

@@ -13,6 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+#
+#  Modified by Andrey Perminov <andrey.ppp@gmail.com> 
+#  for FPC BM-Lite applications
+#
+
 
 CPU = cortex_m4
 LOG :=
