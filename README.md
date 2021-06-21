@@ -1,4 +1,4 @@
-## This project is obsoleted. All new development moved here: https://github.com/andpp/BM-Lite
+## This project is obsoleted. All new development moved to https://github.com/andpp/BM-Lite
 
 ## FPC BM-Lite example application
 
