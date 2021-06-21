@@ -1,3 +1,5 @@
+## This project is obsoleted. All new development moved here: https://github.com/andpp/BM-Lite
+
 ## FPC BM-Lite example application
 
 This is a port of [FPC BM-Lite Development Kit](https://www.fingerprints.com/solutions/access/bm-lite-development-kit/ "BM-Lite Development Kit") to Nordic nRF52840-DK development board. FPC BM-Lite module connected to the dev board by SPI interface.
